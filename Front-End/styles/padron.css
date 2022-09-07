@@ -17,7 +17,12 @@
 }
 
 .navbar--icon{
-    width: 20px;
+    width: 10px;
+    height: auto;
+}
+
+.edit--icon{
+    width: 15px;
     height: auto;
     margin: 5px;
 }
@@ -37,32 +42,27 @@
     border: none;
 }
 
+.btn-search{
+    background-color: #034A91 !important;
+}
+
 .btn-back{
     float: left;
     width: 150px;
 }
 
-.btn-create{
+.btn-load{
     float: right;
-    width: 150px;
 }
 
-.btn-search{
-    background-color: #034A91 !important;
-}
-
-.btn-search:hover{
-    background-color: #3471af !important;
-}
-
-.search--filter--type{
-    list-style-type: none;
+.btn-edit{
+    background-color: #686f76 !important;
+    border: none !important;
 }
 
 .table--container{
     margin: 40px;
 }
-
 
 tr:hover{
     background-color: #b0b1b2 !important;
