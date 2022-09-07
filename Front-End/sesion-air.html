@@ -35,28 +35,35 @@
 
 <body>
 
-    <div class="container-principal">
-        <!-- Container Informacion de Sesion -->
-        <div class="inf--container">
-            <text id="name-asamblea" name="name-asamblea" rows="2" cols="50" disabled="true" style="background-color:white; resize: none; font-size: 23px;" > Nombre Asamblea </text>
-            <text id="fecha-asamblea" name="fecha-asamblea" rows="2" cols="50" disabled="true" style="background-color:white; resize: none; font-size: 23px;" > Fecha:</text>
-            <text id="hora-asamblea" name="hora-asamblea" rows="2" cols="50" disabled="true" style="background-color:white; resize: none; font-size: 23px;" > Hora de inicio:</text>
-        </div>
-
-        <!-- Container Descripcion Sesion -->
-        <div class="texfield--container">
-            <textarea id="descripcion" name="descripcion" rows="4" cols="50" disabled="true" style="background-color:#D9D9D9; resize: none;" > Descripcion </textarea>
-        </div>
-
-        <!-- Container Botones -->
-        <div class="button--container">
-            <a href="./menu.html" class="btn btn-secondary btn-back"> Volver </a>
-            <a href="./menu.html" class="btn btn-primary btn-create"> Ver Propuesta </a>
-            <a href="./menu.html" class="btn btn-primary btn-create"> Editar Propuesta </a>
-            <a href="./menu.html" class="btn btn-primary btn-create"> Crear </a>
-
-        </div> 
+            <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationTooltip03">Nombre del Evento: </label>
+      <input type="text" class="form-control" id="validationTooltip01" disabled="true" placeholder="Nombre del Evento" required>
     </div>
+
+  </div>
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+      <label for="validationTooltip03">Fecha del Evento: </label>
+      <input type="date"  class="form-control" id="validationTooltip02"  disabled="true" placeholder="Fecha del Evento" required> 
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationTooltip03">Hora: </label>
+      <input type="date"  class="form-control" id="validationTooltip02" disabled="true" placeholder="Fecha del Evento" required> 
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationTooltip03">Descripción: </label>
+      <input type="text" style="width: 512px; height: 100px;" disabled="true" class="form-control" id="validationTooltip03" placeholder="Inserte la descripción del evento" required>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Guardar</button>
+  <button class="btn btn-primary" type="submit">Ver Propuesta</button>
+  <button class="btn btn-primary" type="submit">Cambiar Propuesta</button>
+  <a href="./sesiones.html"class="btn btn-primary" type="submit">Volver</a>
+</form>
 
 </body>
 
