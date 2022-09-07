@@ -17,8 +17,9 @@
 }
 
 .navbar--icon{
-    width: 10px;
+    width: 20px;
     height: auto;
+    margin: 5px;
 }
 
 .edit--icon{
