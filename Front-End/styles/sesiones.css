@@ -37,6 +37,16 @@
     border: none;
 }
 
+.btn-back{
+    float: left;
+    width: 150px;
+}
+
+.btn-primary{
+    float: right;
+    width: 150px;
+}
+
 .btn-search{
     background-color: #034A91 !important;
 }
