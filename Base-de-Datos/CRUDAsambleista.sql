@@ -88,17 +88,22 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		UPDATE [dbo].[Biomasa]
-		SET DepartamentoId = @IdUnidad,
-			SectorId = @Nombre,
-			SedeId = @Descripcion,
-			[Precio] = @Precio,
-			[Cantidad] = @Cantidad
-		WHERE Cedula = @Cedula
-				
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION leerAsambleista
+			UPDATE [dbo].[Biomasa]
+			SET DepartamentoId = @IdUnidad,
+				SectorId = @Nombre,
+				SedeId = @Descripcion,
+				[Precio] = @Precio,
+				[Cantidad] = @Cantidad
+			WHERE Cedula = @Cedula
+		COMMIT TRANSACTION leerAsambleista;
+		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
+		IF @@TRANCOUNT>0
+			ROLLBACK TRANSACTION modificarAsambleista;
 		SELECT -1
 	END CATCH
 SET NOCOUNT OFF
