@@ -58,7 +58,6 @@ SET NOCOUNT ON
 		INNER JOIN dbo.Sector Sec ON A.SectorId = Sec.Id
 		INNER JOIN dbo.Sede Se ON A.SedeId = Se.Id
 		WHERE [Id] = @Id
-		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
@@ -92,7 +91,7 @@ SET NOCOUNT ON
 				Nombre = @Nombre
 			WHERE Cedula = @Cedula
 		COMMIT TRANSACTION leerAsambleista;
-		SELECT @@Identity Id;
+		SELECT 1;
 	END TRY
 
 	BEGIN CATCH

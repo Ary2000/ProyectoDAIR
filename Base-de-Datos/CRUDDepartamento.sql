@@ -43,7 +43,6 @@ SET NOCOUNT ON
 		SELECT Nombre
 		FROM dbo.Departamento
 		WHERE [Id] = @Id
-		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
@@ -71,7 +70,7 @@ SET NOCOUNT ON
 			SET Nombre = @Nombre
 			WHERE Id = @Id
 		COMMIT TRANSACTION modificarDepartamento;
-		SELECT @@Identity Id;
+		SELECT 1;
 	END TRY
 
 	BEGIN CATCH
