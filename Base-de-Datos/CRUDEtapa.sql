@@ -1,0 +1,84 @@
+USE [ProyectoDAIR];
+GO
+
+IF OBJECT_ID('[dbo].[CreateEtapa]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[CreateEtapa] 
+END 
+GO
+CREATE PROC [dbo].[CreateEtapa] 
+	@Nombre NVARCHAR(32)
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION nuevaEtapa
+			INSERT INTO dbo.Etapa(Nombre)
+			SELECT @Nombre;
+		COMMIT TRANSACTION nuevaEtapa;
+		SELECT @@Identity Id;
+	END TRY
+
+	BEGIN CATCH
+		IF @@TRANCOUNT>0
+			ROLLBACK TRANSACTION nuevaEtapa;
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
+
+IF OBJECT_ID('[dbo].[ReadEtapa]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[ReadEtapa] 
+END 
+GO
+CREATE PROC [dbo].[ReadEtapa] 
+    @Id INT
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SELECT Nombre
+		FROM dbo.Etapa
+		WHERE [Id] = @Id
+		SELECT @@Identity Id;
+	END TRY
+
+	BEGIN CATCH
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
+
+IF OBJECT_ID('[dbo].[UpdateEtapa]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[UpdateEtapa] 
+END 
+GO
+CREATE PROC [dbo].[UpdateEtapa]
+	@Id INT,
+	@Nombre NVARCHAR(32)
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION modificarEtapa
+			UPDATE dbo.Etapa
+			SET Nombre = @Nombre
+			WHERE Id = @Id
+		COMMIT TRANSACTION modificarEtapa;
+		SELECT @@Identity Id;
+	END TRY
+
+	BEGIN CATCH
+		IF @@TRANCOUNT>0
+			ROLLBACK TRANSACTION modificarEtapa;
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
