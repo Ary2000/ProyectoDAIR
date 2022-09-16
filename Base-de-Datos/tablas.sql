@@ -1,4 +1,4 @@
---DROP DATABASE [ProyectoDAIR]
+--DROP DATABASE IF EXISTS [ProyectoDAIR]
 
 --CREATE DATABASE [ProyectoDAIR]
 
@@ -38,14 +38,14 @@ CREATE TABLE Periodo(
 
 CREATE TABLE Notificacion(
 	  [Id]					INT NOT NULL IDENTITY(1,1),
-	  [Motivo]				NVARCHAR(252) NOT NULL,
+	  [Motivo]				NVARCHAR(256) NOT NULL,
 	  [FechaNotificacion]	DATE NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
 CREATE TABLE Asambleista(
 	  [Id]					INT NOT NULL IDENTITY(1,1),
-	  [DepartamentoId]				INT NOT NULL,
+	  [DepartamentoId]		INT NOT NULL,
 	  [SectorId]			INT NOT NULL,
 	  [SedeId]				INT NOT NULL,
 	  [Nombre]				NVARCHAR(64) NOT NULL,
@@ -54,19 +54,6 @@ CREATE TABLE Asambleista(
 	  FOREIGN KEY ([DepartamentoId]) REFERENCES dbo.Departamento ([ID]),
 	  FOREIGN KEY ([SectorId]) REFERENCES dbo.Sector ([ID]),
 	  FOREIGN KEY ([SedeId]) REFERENCES dbo.Sede ([ID])
-);
-
-CREATE TABLE Votacion(
-	  [Id]					INT NOT NULL IDENTITY(1,1),
-	  [AsambleistasPresentes]			INT NOT NULL,
-	  [PersonalTecnico]					INT NOT NULL,
-	  [AsambleistasVotoInicio]			INT NOT NULL,
-	  [AsambleistasVotoFinal]			INT NOT NULL,
-	  [VotosEmitidos]					INT NOT NULL,
-	  [VotosSinEmitir]					INT NOT NULL,
-	  [VotosAFavor]						INT NOT NULL,
-	  [VotosEnContra]					INT NOT NULL
-	  PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
 CREATE TABLE SesionAIR(
@@ -94,26 +81,27 @@ CREATE TABLE SesionDAIR(
 CREATE TABLE PropuestaDAIR(
 	  [Id]					INT NOT NULL IDENTITY(1,1),
 	  [SesionDAIRId]		INT NOT NULL,
-	  [VotacionId]			INT NOT NULL,
 	  [Nombre]				NVARCHAR(64) NOT NULL,
-	  [Resumen]				NVARCHAR(1024) NOT NULL
+	  [Aprovado]			BIT NOT NULL,
+	  [Link]				NVARCHAR(256) NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
-	  FOREIGN KEY ([SesionDAIRId]) REFERENCES dbo.SesionDAIR ([ID]),
-	  FOREIGN KEY ([VotacionId]) REFERENCES dbo.Votacion ([ID])
+	  FOREIGN KEY ([SesionDAIRId]) REFERENCES dbo.SesionDAIR ([ID])
 );
 
 CREATE TABLE PropuestaAIR(
 	  [Id]					INT NOT NULL IDENTITY(1,1),
 	  [SesionAIRId]			INT NOT NULL,
 	  [EtapaId]				INT NOT NULL,
-	  [VotacionId]			INT NOT NULL,
+	  [Aprovado]			BIT NOT NULL,
 	  [Nombre]				NVARCHAR(64) NOT NULL,
-	  [Resumen]				NVARCHAR(1024) NOT NULL,
-	  [NumeroDePropuesta]	INT NOT NULL
+	  [Link]				NVARCHAR(256) NOT NULL,
+	  [NumeroDePropuesta]	INT NOT NULL,
+	  [VotosAFavor]			INT NOT NULL,
+	  [VotosEnContra]		INT NOT NULL,
+	  [VotosEnBlanco]		INT NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
 	  FOREIGN KEY ([SesionAIRId]) REFERENCES dbo.SesionAIR ([ID]),
-	  FOREIGN KEY ([EtapaId]) REFERENCES dbo.Etapa ([ID]),
-	  FOREIGN KEY ([VotacionId]) REFERENCES dbo.Votacion ([ID])
+	  FOREIGN KEY ([EtapaId]) REFERENCES dbo.Etapa ([ID])
 );
 
 CREATE TABLE RegistroAsistenciaDAIR(
@@ -150,7 +138,7 @@ CREATE TABLE Padron(
 
 CREATE TABLE Usuario(
 	  [Id]					INT NOT NULL IDENTITY(1,1),
-	  [Nombre]				NVARCHAR(32),
+	  [Nombre]				NVARCHAR(64),
 	  [Contrasenia]			NVARChAR(32)
 	  PRIMARY KEY CLUSTERED ([ID] ASC)
 );
@@ -158,6 +146,9 @@ CREATE TABLE Usuario(
 CREATE TABLE PropuestaAIRxAsambleista(
 	  [Id]					INT NOT NULL IDENTITY(1,1),
 	  [AsambleistaId]		INT NOT NULL,
-	  [PropuestaAIRId]		INT NOT NULL
-	  PRIMARY KEY CLUSTERED ([ID] ASC)
+	  [PropuestaAIRId]		INT NOT NULL,
+	  [Validaion]			BIT NOT NULL
+	  PRIMARY KEY CLUSTERED ([ID] ASC),
+	  FOREIGN KEY ([AsambleistaId]) REFERENCES dbo.Asambleista ([ID]),
+	  FOREIGN KEY ([PropuestaAIRId]) REFERENCES dbo.PropuestaAIR ([ID])
 );
