@@ -52,12 +52,12 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT D.Nombre, Sec.Nombre, Se.Nombre, Nombre, Cedula
+		SELECT D.Nombre, Sec.Nombre, Se.Nombre, A.Nombre, A.Cedula
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector Sec ON A.SectorId = Sec.Id
 		INNER JOIN dbo.Sede Se ON A.SedeId = Se.Id
-		WHERE [Id] = @Id
+		WHERE A.[Id] = @Id
 	END TRY
 
 	BEGIN CATCH
@@ -84,7 +84,7 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION leerAsambleista
-			UPDATE [dbo].[Biomasa]
+			UPDATE dbo.Asambleista
 			SET DepartamentoId = @DepartamentoId,
 				SectorId = @SectorId,
 				SedeId = @SedeId,
