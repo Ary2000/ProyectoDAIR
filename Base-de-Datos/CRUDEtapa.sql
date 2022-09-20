@@ -43,7 +43,6 @@ SET NOCOUNT ON
 		SELECT Nombre
 		FROM dbo.Etapa
 		WHERE [Id] = @Id
-		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
@@ -71,7 +70,7 @@ SET NOCOUNT ON
 			SET Nombre = @Nombre
 			WHERE Id = @Id
 		COMMIT TRANSACTION modificarEtapa;
-		SELECT @@Identity Id;
+		SELECT @Id;
 	END TRY
 
 	BEGIN CATCH

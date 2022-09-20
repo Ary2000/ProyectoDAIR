@@ -7,7 +7,7 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[CreatePadron] 
-	@Asamblea INT,
+	@Asambleista INT,
 	@Periodo INT, 
 	@Validacion BIT
 AS
@@ -19,7 +19,7 @@ SET NOCOUNT ON
 			INSERT INTO dbo.Padron(AsambleistaId,
 									PeriodoId,
 									Validacion)
-			SELECT @Asamblea,
+			SELECT @Asambleista,
 					@Periodo,
 					@Validacion;
 		COMMIT TRANSACTION nuevoPadron;

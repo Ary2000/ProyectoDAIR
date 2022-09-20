@@ -86,3 +86,31 @@ SET NOCOUNT ON
 SET NOCOUNT OFF
 END
 GO
+
+IF OBJECT_ID('[dbo].[DeleteNotificacion]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[DeleteNotificacion] 
+END 
+GO
+CREATE PROC [dbo].[DeleteNotificacion] 
+    @Id INT
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION eliminarNotificacion
+			DELETE FROM dbo.Notificacion
+			WHERE [Id] = @Id
+		COMMIT TRANSACTION eliminarNotificacion;
+		SELECT 1;
+	END TRY
+
+	BEGIN CATCH
+		IF @@TRANCOUNT>0
+			ROLLBACK TRANSACTION modificarNotificacion;
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
