@@ -7,7 +7,7 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[CreatePadron] 
-	@Asambleista INT,
+	@Cedula INT,
 	@Periodo INT, 
 	@Validacion BIT
 AS
@@ -16,14 +16,26 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION nuevoPadron
-			INSERT INTO dbo.Padron(AsambleistaId,
-									PeriodoId,
-									Validacion)
-			SELECT @Asambleista,
-					@Periodo,
-					@Validacion;
+			IF EXISTS (SELECT Id FROM dbo.Asambleista WHERE Cedula = @Cedula)
+				BEGIN
+					DECLARE @Asambleista INT
+					SELECT @Asambleista = A.Id
+					FROM dbo.Asambleista A
+					WHERE A.Cedula = @Cedula
+					INSERT INTO dbo.Padron(AsambleistaId,
+											PeriodoId,
+											Validacion)
+					SELECT @Asambleista,
+							@Periodo,
+							@Validacion;
+					
+					SELECT @@Identity Id;
+				END
+			ELSE
+				BEGIN
+					SELECT 0;
+				END
 		COMMIT TRANSACTION nuevoPadron;
-		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
@@ -77,6 +89,35 @@ SET NOCOUNT ON
 			UPDATE dbo.Padron
 			SET Validacion = @Validacion
 			WHERE AsambleistaId = @AsambleistaId
+		COMMIT TRANSACTION modificarPadron;
+		SELECT 1;
+	END TRY
+
+	BEGIN CATCH
+		IF @@TRANCOUNT>0
+			ROLLBACK TRANSACTION modificarPadron;
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
+
+IF OBJECT_ID('[dbo].[NuevoPeriodo]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[NuevoPeriodo] 
+END 
+GO
+CREATE PROC [dbo].[NuevoPeriodo]
+	@PeriodoId INT
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION modificarPadron
+			UPDATE dbo.Padron
+			SET Validacion = 0
+			WHERE PeriodoId = @PeriodoId
 		COMMIT TRANSACTION modificarPadron;
 		SELECT 1;
 	END TRY
