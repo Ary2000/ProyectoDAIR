@@ -8,25 +8,38 @@ END
 GO
 CREATE PROC [dbo].[CreateAsistenciaAIR] 
 	@SesionAIRId INT,
-	@AsambleistaId INT,
-	@Asistio BIT,
-	@Validacion BIT
+	@Cedula NVARCHAR(16),
+	@Asistio BIT
 AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-		BEGIN TRANSACTION nuevaAsistenciaAIR
-			INSERT INTO dbo.RegistroAsistenciaAIR(SesionAIRId,
-										AsambleistaId,
-										Asistio,
-										Validacion)
-			SELECT @SesionAIRId,
-					@AsambleistaId,
-					@Asistio,
-					@Validacion;
-		COMMIT TRANSACTION nuevaAsistenciaAIR;
-		SELECT @@Identity Id;
+		IF EXISTS (SELECT Id FROM dbo.Asambleista WHERE Cedula = @Cedula)
+			BEGIN
+				DECLARE @AsambleistaId INT
+				SELECT @AsambleistaId = A.Id
+				FROM dbo.Asambleista A
+				WHERE A.Cedula = @Cedula
+				SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+				BEGIN TRANSACTION nuevaAsistenciaAIR
+					INSERT INTO dbo.RegistroAsistenciaAIR(SesionAIRId,
+												AsambleistaId,
+												Asistio,
+												Validacion)
+					SELECT @SesionAIRId,
+							@AsambleistaId,
+							@Asistio,
+							1;
+				COMMIT TRANSACTION nuevaAsistenciaAIR;
+				SELECT @@Identity Id;
+			END
+		ELSE
+			BEGIN
+				UPDATE dbo.RegistroAsistenciaAIR
+				SET Asistio = @Asistio,
+					Validacion = 1
+				WHERE SesionAIRId = @SesionAIRId
+			END
 	END TRY
 
 	BEGIN CATCH
@@ -116,6 +129,35 @@ SET NOCOUNT ON
 	BEGIN CATCH
 		IF @@TRANCOUNT>0
 			ROLLBACK TRANSACTION eliminarAsistenciaAIR;
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
+
+IF OBJECT_ID('[dbo].[NuevoRegistro]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[NuevoRegistro] 
+END 
+GO
+CREATE PROC [dbo].[NuevoRegistro]
+	@SesionId INT
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION modificarAsistenciaAIR
+			UPDATE dbo.RegistroAsistenciaAIR
+			SET Validacion = 0
+			WHERE SesionAIRId = @SesionId
+		COMMIT TRANSACTION modificarAsistenciaAIR;
+		SELECT 1;
+	END TRY
+
+	BEGIN CATCH
+		IF @@TRANCOUNT>0
+			ROLLBACK TRANSACTION modificarAsistenciaAIR;
 		SELECT -1
 	END CATCH
 SET NOCOUNT OFF
