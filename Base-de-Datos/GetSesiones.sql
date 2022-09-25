@@ -47,3 +47,53 @@ SET NOCOUNT ON
 SET NOCOUNT OFF
 END
 GO
+
+IF OBJECT_ID('[dbo].[BuscarSesionAIR]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[BuscarSesionAIR] 
+END 
+GO
+CREATE PROC [dbo].[BuscarSesionAIR] 
+    @Entrada NVARCHAR(64)
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SELECT P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
+		FROM dbo.SesionAIR S
+		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
+		WHERE S.Nombre LIKE '%' + @Entrada + '%'
+		ORDER BY S.Fecha
+	END TRY
+
+	BEGIN CATCH
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
+
+IF OBJECT_ID('[dbo].[BuscarSesionDAIR]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[BuscarSesionDAIR] 
+END 
+GO
+CREATE PROC [dbo].[BuscarSesionDAIR] 
+    @Entrada NVARCHAR(64)
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SELECT P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
+		FROM dbo.SesionDAIR S
+		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
+		WHERE S.Nombre LIKE '%' + @Entrada + '%'
+		ORDER BY S.Fecha
+	END TRY
+
+	BEGIN CATCH
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
