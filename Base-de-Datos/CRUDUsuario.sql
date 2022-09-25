@@ -15,12 +15,20 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION nuevoUsuario
-			INSERT INTO dbo.Usuario(Nombre,
-									Contrasenia)
-			SELECT @Nombre,
-					@Contrasenia;
+			IF NOT EXISTS (SELECT Id FROM dbo.Usuario WHERE Nombre = @Nombre)
+				BEGIN
+					INSERT INTO dbo.Usuario(Nombre,
+											Contrasenia)
+					SELECT @Nombre,
+							@Contrasenia;
+					
+					SELECT @@Identity Id;
+				END
+			ELSE
+				BEGIN
+					SELECT 0
+				END
 		COMMIT TRANSACTION nuevoUsuario;
-		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
