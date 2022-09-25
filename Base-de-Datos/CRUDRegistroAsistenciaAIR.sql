@@ -14,14 +14,14 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		IF EXISTS (SELECT Id FROM dbo.Asambleista WHERE Cedula = @Cedula)
-			BEGIN
-				DECLARE @AsambleistaId INT
-				SELECT @AsambleistaId = A.Id
-				FROM dbo.Asambleista A
-				WHERE A.Cedula = @Cedula
-				SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-				BEGIN TRANSACTION nuevaAsistenciaAIR
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION nuevaAsistenciaAIR
+			IF EXISTS (SELECT Id FROM dbo.Asambleista WHERE Cedula = @Cedula)
+				BEGIN
+					DECLARE @AsambleistaId INT
+					SELECT @AsambleistaId = A.Id
+					FROM dbo.Asambleista A
+					WHERE A.Cedula = @Cedula
 					INSERT INTO dbo.RegistroAsistenciaAIR(SesionAIRId,
 												AsambleistaId,
 												Asistio,
@@ -30,16 +30,16 @@ SET NOCOUNT ON
 							@AsambleistaId,
 							@Asistio,
 							1;
-				COMMIT TRANSACTION nuevaAsistenciaAIR;
-				SELECT @@Identity Id;
-			END
-		ELSE
-			BEGIN
-				UPDATE dbo.RegistroAsistenciaAIR
-				SET Asistio = @Asistio,
-					Validacion = 1
-				WHERE SesionAIRId = @SesionAIRId
-			END
+					SELECT @@Identity Id;
+				END
+			ELSE
+				BEGIN
+					UPDATE dbo.RegistroAsistenciaAIR
+					SET Asistio = @Asistio,
+						Validacion = 1
+					WHERE SesionAIRId = @SesionAIRId
+				END
+		COMMIT TRANSACTION nuevaAsistenciaAIR;
 	END TRY
 
 	BEGIN CATCH
