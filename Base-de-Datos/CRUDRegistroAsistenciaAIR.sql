@@ -135,12 +135,12 @@ SET NOCOUNT OFF
 END
 GO
 
-IF OBJECT_ID('[dbo].[NuevoRegistro]') IS NOT NULL
+IF OBJECT_ID('[dbo].[NuevoRegistroAIR]') IS NOT NULL
 BEGIN 
-    DROP PROC [dbo].[NuevoRegistro] 
+    DROP PROC [dbo].[NuevoRegistroAIR] 
 END 
 GO
-CREATE PROC [dbo].[NuevoRegistro]
+CREATE PROC [dbo].[NuevoRegistroAIR]
 	@SesionId INT
 AS
 BEGIN
@@ -151,6 +151,35 @@ SET NOCOUNT ON
 			UPDATE dbo.RegistroAsistenciaAIR
 			SET Validacion = 0
 			WHERE SesionAIRId = @SesionId
+		COMMIT TRANSACTION modificarAsistenciaAIR;
+		SELECT 1;
+	END TRY
+
+	BEGIN CATCH
+		IF @@TRANCOUNT>0
+			ROLLBACK TRANSACTION modificarAsistenciaAIR;
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
+
+IF OBJECT_ID('[dbo].[NuevoRegistroDAIR]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[NuevoRegistroDAIR] 
+END 
+GO
+CREATE PROC [dbo].[NuevoRegistroDAIR]
+	@SesionId INT
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+		BEGIN TRANSACTION modificarAsistenciaAIR
+			UPDATE dbo.RegistroAsistenciaDAIR
+			SET Validacion = 0
+			WHERE SesionDAIRId = @SesionId
 		COMMIT TRANSACTION modificarAsistenciaAIR;
 		SELECT 1;
 	END TRY
