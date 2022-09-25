@@ -130,3 +130,28 @@ SET NOCOUNT ON
 SET NOCOUNT OFF
 END
 GO
+
+IF OBJECT_ID('[dbo].[GetPadron]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[GetPadron] 
+END 
+GO
+CREATE PROC [dbo].[GetPadron] 
+    @PeriodoId INT
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SELECT A.Nombre, A.Cedula, D.Nombre AS Departamento
+		FROM dbo.Padron Pa
+		INNER JOIN dbo.Asambleista A ON A.Id = Pa.AsambleistaId
+		INNER JOIN dbo.Departamento D ON D.Id = A.DepartamentoId
+		WHERE Pa.[PeriodoId] = @PeriodoId AND Pa.Validacion = 1
+	END TRY
+
+	BEGIN CATCH
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
