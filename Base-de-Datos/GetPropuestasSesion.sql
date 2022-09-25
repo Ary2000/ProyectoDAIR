@@ -16,6 +16,7 @@ SET NOCOUNT ON
 		FROM dbo.PropuestaAIR P
 		INNER JOIN dbo.Etapa E ON E.Id = P.EtapaId
 		WHERE P.SesionAIRId = @SesionId
+		ORDER BY P.NumeroDePropuesta
 	END TRY
 
 	BEGIN CATCH
