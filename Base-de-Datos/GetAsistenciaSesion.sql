@@ -16,7 +16,7 @@ SET NOCOUNT ON
 		FROM dbo.RegistroAsistenciaAIR R
 		INNER JOIN dbo.Asambleista A ON R.AsambleistaId = A.Id
 		INNER JOIN dbo.SesionAIR S ON R.SesionAIRId = S.Id
-		WHERE R.SesionAIRId = @SesionId
+		WHERE R.SesionAIRId = @SesionId AND R.Validacion = 1
 		ORDER BY A.Nombre
 	END TRY
 
@@ -45,7 +45,7 @@ SET NOCOUNT ON
 		FROM dbo.RegistroAsistenciaDAIR R
 		INNER JOIN dbo.Asambleista A ON R.AsambleistaId = A.Id
 		INNER JOIN dbo.SesionAIR S ON R.SesionDAIRId = S.Id
-		WHERE R.SesionDAIRId = @SesionId
+		WHERE R.SesionDAIRId = @SesionId AND R.Validacion = 1
 		ORDER BY A.Nombre
 	END TRY
 
