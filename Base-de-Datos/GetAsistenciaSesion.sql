@@ -17,6 +17,7 @@ SET NOCOUNT ON
 		INNER JOIN dbo.Asambleista A ON R.AsambleistaId = A.Id
 		INNER JOIN dbo.SesionAIR S ON R.SesionAIRId = S.Id
 		WHERE R.SesionAIRId = @SesionId
+		ORDER BY A.Nombre
 	END TRY
 
 	BEGIN CATCH
@@ -45,6 +46,7 @@ SET NOCOUNT ON
 		INNER JOIN dbo.Asambleista A ON R.AsambleistaId = A.Id
 		INNER JOIN dbo.SesionAIR S ON R.SesionDAIRId = S.Id
 		WHERE R.SesionDAIRId = @SesionId
+		ORDER BY A.Nombre
 	END TRY
 
 	BEGIN CATCH
