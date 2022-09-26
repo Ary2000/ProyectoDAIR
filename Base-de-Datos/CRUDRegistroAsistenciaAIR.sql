@@ -94,6 +94,7 @@ SET NOCOUNT ON
 			DECLARE @AsambleistaId INT
 			SELECT @AsambleistaId = A.Id
 			FROM dbo.Asambleista A
+			WHERE A.Cedula = @Cedula
 			
 			UPDATE dbo.RegistroAsistenciaAIR
 			SET Asistio = @Asistio
