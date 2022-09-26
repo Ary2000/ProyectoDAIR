@@ -31,10 +31,6 @@ SET NOCOUNT ON
 		FROM dbo.Sede
 		WHERE Nombre = @Sede
 		
-		IF (@SedeId = 0 OR @SectorId = 0 OR @DepartamentoId = 0)
-			BEGIN
-				SELECT -2
-			END	
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION nuevoAsambleista
 			IF NOT EXISTS (SELECT Id FROM dbo.Asambleista WHERE Cedula = @Cedula)
@@ -102,8 +98,8 @@ CREATE PROC [dbo].[UpdateAsambleista]
 	@Departamento NVARCHAR(32),
 	@Sector NVARCHAR(32),
 	@Sede NVARCHAR(32),
-	@Nombre NVARCHAR(32),
-	@Cedula NVARCHAR(256)
+	@Nombre NVARCHAR(64),
+	@Cedula NVARCHAR(16)
 AS
 BEGIN
 SET NOCOUNT ON
@@ -123,20 +119,17 @@ SET NOCOUNT ON
 		FROM dbo.Sede
 		WHERE Nombre = @Sede
 		
-		IF (@SedeId = 0 OR @SectorId = 0 OR @DepartamentoId = 0)
-			BEGIN
-				SELECT -2
-			END	
+		
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-		BEGIN TRANSACTION leerAsambleista
+		BEGIN TRANSACTION modificarAsambleista
 			UPDATE dbo.Asambleista
 			SET DepartamentoId = @DepartamentoId,
 				SectorId = @SectorId,
 				SedeId = @SedeId,
 				Nombre = @Nombre
 			WHERE Cedula = @Cedula
-		COMMIT TRANSACTION leerAsambleista;
-		SELECT 1;
+			SELECT 1;
+		COMMIT TRANSACTION modificarAsambleista;
 	END TRY
 
 	BEGIN CATCH
