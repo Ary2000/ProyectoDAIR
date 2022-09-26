@@ -14,10 +14,17 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION nuevaSede
-			INSERT INTO dbo.Sede(Nombre)
-			SELECT @Nombre;
+			IF NOT EXISTS(SELECT Id FROM dbo.Sede WHERE Nombre = @Nombre)
+				BEGIN
+					INSERT INTO dbo.Sede(Nombre)
+					SELECT @Nombre;
+					SELECT @@Identity Id;
+				END
+			ELSE
+				BEGIN
+					SELECT 0
+				END
 		COMMIT TRANSACTION nuevaSede;
-		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
