@@ -7,29 +7,55 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[CreateAsambleista] 
-    @DepartamentoId INT,
-	@SectorId INT,
-	@SedeId INT,
-	@Nombre NVARCHAR(32),
-	@Cedula NVARCHAR(256)
+    @Departamento NVARCHAR(32),
+	@Sector NVARCHAR(32),
+	@Sede NVARCHAR(32),
+	@Nombre NVARCHAR(64),
+	@Cedula NVARCHAR(16)
 AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
+		DECLARE @DepartamentoId INT,
+				@SectorId INT,
+				@SedeId INT
+		SELECT @DepartamentoId = Id
+		FROM dbo.Departamento
+		WHERE Nombre = @Departamento
+		
+		SELECT @SectorId = Id
+		FROM dbo.Sector
+		WHERE Nombre = @Sector
+		
+		SELECT @SedeId = Id
+		FROM dbo.Sede
+		WHERE Nombre = @Sede
+		
+		IF (@SedeId = 0 OR @SectorId = 0 OR @DepartamentoId = 0)
+			BEGIN
+				SELECT -2
+			END	
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION nuevoAsambleista
-			INSERT INTO dbo.Asambleista(DepartamentoId,
-									SectorId,
-									SedeId,
-									Nombre,
-									Cedula)
-			SELECT @DepartamentoId,
-					@SectorId,
-					@SedeId,
-					@Nombre,
-					@Cedula;
+			IF NOT EXISTS (SELECT Id FROM dbo.Asambleista WHERE Cedula = @Cedula)
+				BEGIN
+					INSERT INTO dbo.Asambleista(DepartamentoId,
+											SectorId,
+											SedeId,
+											Nombre,
+											Cedula)
+					SELECT @DepartamentoId,
+							@SectorId,
+							@SedeId,
+							@Nombre,
+							@Cedula;
+					SELECT @@Identity Id;
+				END
+			ELSE
+				BEGIN
+					SELECT 0
+				END
 		COMMIT TRANSACTION nuevoAsambleista;
-		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
@@ -52,7 +78,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT D.Nombre, Sec.Nombre, Se.Nombre, A.Nombre, A.Cedula
+		SELECT A.Nombre, A.Cedula,D.Nombre AS Departamento, Sec.Nombre AS Sector, Se.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector Sec ON A.SectorId = Sec.Id
@@ -73,15 +99,34 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[UpdateAsambleista]
-	@DepartamentoId INT,
-	@SectorId INT,
-	@SedeId INT,
+	@Departamento NVARCHAR(32),
+	@Sector NVARCHAR(32),
+	@Sede NVARCHAR(32),
 	@Nombre NVARCHAR(32),
 	@Cedula NVARCHAR(256)
 AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
+		DECLARE @DepartamentoId INT,
+				@SectorId INT,
+				@SedeId INT
+		SELECT @DepartamentoId = Id
+		FROM dbo.Departamento
+		WHERE Nombre = @Departamento
+		
+		SELECT @SectorId = Id
+		FROM dbo.Sector
+		WHERE Nombre = @Sector
+		
+		SELECT @SedeId = Id
+		FROM dbo.Sede
+		WHERE Nombre = @Sede
+		
+		IF (@SedeId = 0 OR @SectorId = 0 OR @DepartamentoId = 0)
+			BEGIN
+				SELECT -2
+			END	
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION leerAsambleista
 			UPDATE dbo.Asambleista
