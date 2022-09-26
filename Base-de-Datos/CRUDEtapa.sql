@@ -14,10 +14,17 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION nuevaEtapa
-			INSERT INTO dbo.Etapa(Nombre)
-			SELECT @Nombre;
+			IF NOT EXISTS (SELECT Id FROM dbo.Etapa WHERE Nombre = @Nombre)
+				BEGIN
+					INSERT INTO dbo.Etapa(Nombre)
+					SELECT @Nombre;
+					SELECT @@Identity Id;
+				END
+			ELSE
+				BEGIN
+					SELECT 1
+				END
 		COMMIT TRANSACTION nuevaEtapa;
-		SELECT @@Identity Id;
 	END TRY
 
 	BEGIN CATCH
