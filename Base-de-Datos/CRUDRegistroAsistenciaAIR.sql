@@ -16,12 +16,12 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION nuevaAsistenciaAIR
-			IF EXISTS (SELECT Id FROM dbo.Asambleista WHERE Cedula = @Cedula)
+			DECLARE @AsambleistaId INT
+			SELECT @AsambleistaId = A.Id
+			FROM dbo.Asambleista A
+			WHERE A.Cedula = @Cedula
+			IF NOT EXISTS (SELECT Id FROM dbo.RegistroAsistenciaAIR WHERE AsambleistaId = @AsambleistaId AND SesionAIRId = @SesionAIRId)
 				BEGIN
-					DECLARE @AsambleistaId INT
-					SELECT @AsambleistaId = A.Id
-					FROM dbo.Asambleista A
-					WHERE A.Cedula = @Cedula
 					INSERT INTO dbo.RegistroAsistenciaAIR(SesionAIRId,
 												AsambleistaId,
 												Asistio,
@@ -38,6 +38,7 @@ SET NOCOUNT ON
 					SET Asistio = @Asistio,
 						Validacion = 1
 					WHERE SesionAIRId = @SesionAIRId
+					SELECT 0
 				END
 		COMMIT TRANSACTION nuevaAsistenciaAIR;
 	END TRY
@@ -62,10 +63,9 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre,S.Nombre,R.Asistio
+		SELECT A.Nombre,A.Cedula,R.Asistio
 		FROM dbo.RegistroAsistenciaAIR R
 		INNER JOIN dbo.Asambleista A ON R.AsambleistaId = A.Id
-		INNER JOIN dbo.SesionAIR S ON R.SesionAIRId = S.Id
 		WHERE R.[Id] = @Id
 	END TRY
 
@@ -82,7 +82,8 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[UpdateAsistenciaAIR]
-	@Id INT,
+	@SesionAIRId INT,
+	@Cedula NVARCHAR(16),
 	@Asistio BIT
 AS
 BEGIN
@@ -90,11 +91,16 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION modificarAsistenciaAIR
+			DECLARE @AsambleistaId INT
+			SELECT @AsambleistaId = A.Id
+			FROM dbo.Asambleista A
+			WHERE A.Cedula = @Cedula
+			
 			UPDATE dbo.RegistroAsistenciaAIR
 			SET Asistio = @Asistio
-			WHERE Id = @Id
+			WHERE AsambleistaId = @AsambleistaId AND SesionAIRId = SesionAIRId
 		COMMIT TRANSACTION modificarAsistenciaAIR;
-		SELECT @Id;
+		SELECT 1;
 	END TRY
 
 	BEGIN CATCH
@@ -151,35 +157,6 @@ SET NOCOUNT ON
 			UPDATE dbo.RegistroAsistenciaAIR
 			SET Validacion = 0
 			WHERE SesionAIRId = @SesionId
-		COMMIT TRANSACTION modificarAsistenciaAIR;
-		SELECT 1;
-	END TRY
-
-	BEGIN CATCH
-		IF @@TRANCOUNT>0
-			ROLLBACK TRANSACTION modificarAsistenciaAIR;
-		SELECT -1
-	END CATCH
-SET NOCOUNT OFF
-END
-GO
-
-IF OBJECT_ID('[dbo].[NuevoRegistroDAIR]') IS NOT NULL
-BEGIN 
-    DROP PROC [dbo].[NuevoRegistroDAIR] 
-END 
-GO
-CREATE PROC [dbo].[NuevoRegistroDAIR]
-	@SesionId INT
-AS
-BEGIN
-SET NOCOUNT ON
-	BEGIN TRY
-		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-		BEGIN TRANSACTION modificarAsistenciaAIR
-			UPDATE dbo.RegistroAsistenciaDAIR
-			SET Validacion = 0
-			WHERE SesionDAIRId = @SesionId
 		COMMIT TRANSACTION modificarAsistenciaAIR;
 		SELECT 1;
 	END TRY

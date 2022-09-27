@@ -7,27 +7,26 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[CreatePadron] 
-	@Cedula INT,
-	@Periodo INT, 
-	@Validacion BIT
+	@Cedula NVARCHAR(16),
+	@Periodo INT
 AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
+		DECLARE @Asambleista INT
+		SELECT @Asambleista = A.Id
+		FROM dbo.Asambleista A
+		WHERE A.Cedula = @Cedula
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION nuevoPadron
-			IF EXISTS (SELECT Id FROM dbo.Asambleista WHERE Cedula = @Cedula)
+			IF NOT EXISTS (SELECT Id FROM dbo.Padron WHERE AsambleistaId = @Asambleista AND PeriodoId = @Periodo)
 				BEGIN
-					DECLARE @Asambleista INT
-					SELECT @Asambleista = A.Id
-					FROM dbo.Asambleista A
-					WHERE A.Cedula = @Cedula
 					INSERT INTO dbo.Padron(AsambleistaId,
 											PeriodoId,
 											Validacion)
 					SELECT @Asambleista,
 							@Periodo,
-							@Validacion;
+							1;
 					
 					SELECT @@Identity Id;
 				END
@@ -58,11 +57,13 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre, A.Cedula, D.Nombre
+		SELECT A.Nombre, A.Cedula, D.Nombre AS Departamento, S.Nombre AS Sector, Se.Nombre AS Sede, Pa.Validacion
 		FROM dbo.Padron Pa
 		INNER JOIN dbo.Asambleista A ON A.Id = Pa.AsambleistaId
 		INNER JOIN dbo.Departamento D ON D.Id = A.DepartamentoId
-		WHERE Pa.[Id] = @Id AND Pa.Validacion = 1
+		INNER JOIN dbo.Sector S ON S.Id = A.SectorId
+		INNER JOIN dbo.Sede Se ON Se.Id = A.SedeId
+		WHERE Pa.[Id] = @Id
 	END TRY
 
 	BEGIN CATCH
@@ -78,7 +79,8 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[UpdatePadron]
-	@AsambleistaId INT,
+	@Cedula NVARCHAR(16),
+	@Periodo INT,
 	@Validacion BIT
 AS
 BEGIN
@@ -86,9 +88,13 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION modificarPadron
+			DECLARE @AsambleistaId INT
+			SELECT @AsambleistaId = Id
+			FROM dbo.Asambleista
+			WHERE Cedula = @Cedula
 			UPDATE dbo.Padron
 			SET Validacion = @Validacion
-			WHERE AsambleistaId = @AsambleistaId
+			WHERE AsambleistaId = @AsambleistaId AND PeriodoId = @Periodo
 		COMMIT TRANSACTION modificarPadron;
 		SELECT 1;
 	END TRY
@@ -102,12 +108,12 @@ SET NOCOUNT OFF
 END
 GO
 
-IF OBJECT_ID('[dbo].[NuevoPeriodo]') IS NOT NULL
+IF OBJECT_ID('[dbo].[InsertarPadron]') IS NOT NULL
 BEGIN 
-    DROP PROC [dbo].[NuevoPeriodo] 
+    DROP PROC [dbo].[InsertarPadron] 
 END 
 GO
-CREATE PROC [dbo].[NuevoPeriodo]
+CREATE PROC [dbo].[InsertarPadron]
 	@PeriodoId INT
 AS
 BEGIN
@@ -142,10 +148,12 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre, A.Cedula, D.Nombre AS Departamento
+		SELECT A.Nombre, A.Cedula, D.Nombre AS Departamento, S.Nombre AS Sector, Se.Nombre AS Sede
 		FROM dbo.Padron Pa
 		INNER JOIN dbo.Asambleista A ON A.Id = Pa.AsambleistaId
 		INNER JOIN dbo.Departamento D ON D.Id = A.DepartamentoId
+		INNER JOIN dbo.Sector S ON S.Id = A.SectorId
+		INNER JOIN dbo.Sede Se ON Se.Id = A.SedeId
 		WHERE Pa.[PeriodoId] = @PeriodoId AND Pa.Validacion = 1
 	END TRY
 

@@ -7,7 +7,6 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[GetNotificaciones] 
-    @SesionId INT
 AS
 BEGIN
 SET NOCOUNT ON
