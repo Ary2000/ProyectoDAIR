@@ -240,3 +240,25 @@ EXEC ReadProponente 2
 EXEC DeleteProponente 1
 
 SELECT * FROM PropuestaAIRxAsambleista
+
+------------GetSesiones------------
+EXEC GetSesionesAIR
+EXEC GetSesionesDAIR
+
+EXEC BuscarSesionAIR '100'
+EXEC BuscarSesionDAIR '103'
+
+------------GETNOTIFICACIONes------
+EXEC GetNotificaciones
+
+------------GetAsistencia------------
+EXEC GetAsistenciaSesionAIR 4
+EXEC GetAsistenciaSesionDAIR 4
+
+------------GetAsistencia------------
+EXEC GetPropuestasAIR 1
+EXEC GetPropuestasDAIR 1
+
+------------GetAsambleista------------
+EXEC GetAsambleistas
+EXEC BuscarAsambleista 'san'
