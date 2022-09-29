@@ -24,7 +24,7 @@
 <header>
   <nav class="navbar">
     <div class="container-fluid">
-      <h5 class="navbar--tittle"> Registro de Sesiones de AIR</h5>
+      <h5 class="navbar--tittle"> Registro de Sesiones de DAIR</h5>
       <a href="./login.html" class="navbar--button">
         <h5 href="./login.html" class="navbar--cerrar--sesion"> Cerrar sesión </h5>
         <img class="navbar--icon" src="src/salir.png" alt="Salir">
@@ -47,23 +47,33 @@
   </div>
   <div class="form-row">
     <div class="col-md-3 mb-3">
-      <label for="validationTooltip03">Fecha del Evento: </label>
+      <label for="validationTooltip03">Fecha Sesión: </label>
       <input type="date"  class="form-control" id="validationTooltip02" placeholder="Fecha del Evento" required> 
     </div>
     <div class="col-md-3 mb-3">
-      <label for="validationTooltip03">Hora: </label>
-      <input type="date"  class="form-control" id="validationTooltip02" placeholder="Fecha del Evento" required> 
+      <label for="validationTooltip03">Hora Inicio: </label>
+      <input type="time"  class="form-control" id="validationTooltip02" placeholder="Hora Inicio" required> 
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationTooltip03">Hora Fin: </label>
+      <input type="time"  class="form-control" id="validationTooltip02" placeholder="Hora Fin" required> 
     </div>
   </div>
   <div class="form-row">
     <div class="col-md-6 mb-3">
       <label for="validationTooltip03">Descripción: </label>
       <input type="text" style="width: 512px; height: 100px;" class="form-control" id="validationTooltip03" placeholder="Inserte la descripción del evento" required>
-      <label for="validationTooltip03">Subir Documentos: </label>
-      <input type="file"  class="form-control" id="validationTooltip03" placeholder="Documentos" required>
+      <label for="validationTooltip03">Link de Carpeta: </label>
+      <input type="text" class="form-control" id="validationTooltip03" placeholder="Agregar link de carpeta" required>
+      <label for="validationTooltip03">Directorio: </label>
+      <input type="file" class="form-control" id="validationTooltip03" placeholder="Subir Directorio" required>
     </div>
   </div>
-  <button class="btn btn-primary" type="submit">Crear</button>
+  <div class="container--header">
+    <a href="./sesiones-dair.html" class="btn btn-outline-secondary" type="submit">Volver</a>
+    <a href="#"class="btn btn-primary" type="submit">Guardar</a>
+  </div>
+
 </form>
         
     </div>
@@ -71,8 +81,6 @@
 
     </div>
     <div class="footer--container">
-
-      <a href="./menu.html" class="btn btn-secondary btn-back"> Volver </a>
     </div>
 </body>
 
