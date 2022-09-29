@@ -262,3 +262,39 @@ EXEC GetPropuestasDAIR 1
 ------------GetAsambleista------------
 EXEC GetAsambleistas
 EXEC BuscarAsambleista 'san'
+
+
+-------------Pruebas Read-----------
+EXEC dbo.ReadAsambleista 1
+EXEC dbo.ReadAsistenciaAIR 1
+EXEC dbo.ReadAsistenciaDAIR 1
+EXEC dbo.ReadDepartamento 1
+EXEC dbo.ReadEtapa 1
+EXEC dbo.ReadNotificacion 1
+EXEC dbo.ReadPadron 1
+EXEC dbo.ReadPeriodo 1
+EXEC dbo.ReadProponente 1
+EXEC dbo.ReadPropuestaAIR 1
+EXEC dbo.ReadPropuestaDAIR 1
+EXEC dbo.ReadSector 1
+EXEC dbo.ReadSede 1
+EXEC dbo.ReadSesionAIR 1
+EXEC dbo.ReadSesionDAIR 1
+EXEC dbo.ReadUsuario 1
+
+-------------Pruebas Get-----------
+EXEC dbo.GetAsambleistas
+EXEC dbo.GetAsistenciaSesionDAIR 1
+EXEC dbo.GetAsistenciaSesionAIR 1
+EXEC dbo.GetDepartamento
+EXEC dbo.GetEtapa
+EXEC dbo.GetNotificaciones 
+EXEC dbo.GetPadron 1
+EXEC dbo.GetPeriodo
+EXEC dbo.GetProponente 4
+EXEC dbo.GetPropuestasAIR 1
+EXEC dbo.GetPropuestasDAIR 1
+EXEC dbo.GetSector
+EXEC dbo.GetSede
+EXEC dbo.GetSesionesAIR 
+EXEC dbo.GetSesionesDAIR
