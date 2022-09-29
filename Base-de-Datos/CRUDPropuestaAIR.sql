@@ -64,7 +64,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT E.Nombre,P.Nombre,P.Aprovado,P.Link,P.NumeroDePropuesta,P.VotosAFavor,P.VotosEnContra,P.VotosEnBlanco
+		SELECT P.Id,E.Nombre,P.Nombre,P.Aprovado,P.Link,P.NumeroDePropuesta,P.VotosAFavor,P.VotosEnContra,P.VotosEnBlanco
 		FROM dbo.PropuestaAIR P
 		INNER JOIN dbo.Etapa E ON P.EtapaId = E.Id
 		WHERE P.[Id] = @Id

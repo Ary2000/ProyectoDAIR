@@ -12,7 +12,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT E.Nombre AS Etapa, P.Nombre, P.Link,P.Aprovado,P.NumeroDePropuesta,P.VotosAFavor,P.VotosEnContra,P.VotosEnBlanco 
+		SELECT P.Id,E.Nombre AS Etapa, P.Nombre, P.Link,P.Aprovado,P.NumeroDePropuesta,P.VotosAFavor,P.VotosEnContra,P.VotosEnBlanco 
 		FROM dbo.PropuestaAIR P
 		INNER JOIN dbo.Etapa E ON E.Id = P.EtapaId
 		WHERE P.SesionAIRId = @SesionId
@@ -38,7 +38,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT Nombre,Aprovado,Link
+		SELECT Id,Nombre,Aprovado,Link
 		FROM dbo.PropuestaDAIR
 		WHERE Id = @SesionId
 	END TRY

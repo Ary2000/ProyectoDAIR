@@ -49,7 +49,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT Nombre,Aprovado,Link
+		SELECT Id,Nombre,Aprovado,Link
 		FROM dbo.PropuestaDAIR
 		WHERE [Id] = @Id
 	END TRY

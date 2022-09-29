@@ -63,7 +63,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre,A.Cedula,R.Asistio
+		SELECT R.Id,A.Nombre,A.Cedula,R.Asistio
 		FROM dbo.RegistroAsistenciaAIR R
 		INNER JOIN dbo.Asambleista A ON R.AsambleistaId = A.Id
 		WHERE R.[Id] = @Id

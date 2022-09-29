@@ -11,7 +11,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
+		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
 		ORDER BY S.Fecha
@@ -35,7 +35,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
+		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionDAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
 		ORDER BY S.Fecha
@@ -59,7 +59,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
+		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
 		WHERE S.Nombre LIKE '%' + @Entrada + '%'
@@ -84,7 +84,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
+		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionDAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
 		WHERE S.Nombre LIKE '%' + @Entrada + '%'

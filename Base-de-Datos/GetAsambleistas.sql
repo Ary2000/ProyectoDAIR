@@ -11,7 +11,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
+		SELECT A.Id,A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector S ON A.SectorId = S.Id
@@ -37,7 +37,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
+		SELECT A.Id,A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector S ON A.SectorId = S.Id
@@ -65,7 +65,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
+		SELECT A.Id,A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector S ON A.SectorId = S.Id
@@ -92,7 +92,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
+		SELECT A.Id,A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector S ON A.SectorId = S.Id
@@ -119,7 +119,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
+		SELECT A.Id,A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector S ON A.SectorId = S.Id
@@ -146,7 +146,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
+		SELECT A.Id,A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector S ON A.SectorId = S.Id
@@ -173,7 +173,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
+		SELECT A.Id,A.Nombre AS Asambleista,A.Cedula,D.Nombre AS Departamento,S.Nombre AS Sector,Sed.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector S ON A.SectorId = S.Id

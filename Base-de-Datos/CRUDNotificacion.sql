@@ -43,7 +43,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT Motivo,FechaNotificacion
+		SELECT Id,Motivo,FechaNotificacion
 		FROM dbo.Notificacion
 		WHERE [Id] = @Id
 	END TRY

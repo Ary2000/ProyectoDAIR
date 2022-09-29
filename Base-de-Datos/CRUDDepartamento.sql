@@ -47,7 +47,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT Nombre
+		SELECT Id,Nombre
 		FROM dbo.Departamento
 		WHERE [Id] = @Id
 	END TRY
@@ -83,6 +83,27 @@ SET NOCOUNT ON
 	BEGIN CATCH
 		IF @@TRANCOUNT>0
 			ROLLBACK TRANSACTION modificarDepartamento;
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
+
+IF OBJECT_ID('[dbo].[GetDepartamento]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[GetDepartamento] 
+END 
+GO
+CREATE PROC [dbo].[GetDepartamento]
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SELECT Id,Nombre
+		FROM dbo.Departamento
+	END TRY
+
+	BEGIN CATCH
 		SELECT -1
 	END CATCH
 SET NOCOUNT OFF

@@ -12,7 +12,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,S.Nombre AS Sesion,R.Asistio AS Asistencia
+		SELECT R.Id,A.Nombre AS Asambleista,S.Nombre AS Sesion,R.Asistio AS Asistencia
 		FROM dbo.RegistroAsistenciaAIR R
 		INNER JOIN dbo.Asambleista A ON R.AsambleistaId = A.Id
 		INNER JOIN dbo.SesionAIR S ON R.SesionAIRId = S.Id
@@ -41,7 +41,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre AS Asambleista,S.Nombre AS Sesion,R.Asistio AS Asistencia
+		SELECT R.Id,A.Nombre AS Asambleista,S.Nombre AS Sesion,R.Asistio AS Asistencia
 		FROM dbo.RegistroAsistenciaDAIR R
 		INNER JOIN dbo.Asambleista A ON R.AsambleistaId = A.Id
 		INNER JOIN dbo.SesionAIR S ON R.SesionDAIRId = S.Id

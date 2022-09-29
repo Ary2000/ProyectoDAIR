@@ -74,7 +74,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT A.Nombre, A.Cedula,D.Nombre AS Departamento, Sec.Nombre AS Sector, Se.Nombre AS Sede
+		SELECT A.Id,A.Nombre, A.Cedula,D.Nombre AS Departamento, Sec.Nombre AS Sector, Se.Nombre AS Sede
 		FROM dbo.Asambleista A
 		INNER JOIN dbo.Departamento D ON A.DepartamentoId = D.Id
 		INNER JOIN dbo.Sector Sec ON A.SectorId = Sec.Id

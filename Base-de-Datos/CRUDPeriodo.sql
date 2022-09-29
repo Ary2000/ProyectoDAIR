@@ -43,7 +43,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT AnioInicio,AnioFin
+		SELECT Id,AnioInicio,AnioFin
 		FROM dbo.Periodo
 		WHERE [Id] = @Id
 	END TRY
@@ -81,6 +81,27 @@ SET NOCOUNT ON
 	BEGIN CATCH
 		IF @@TRANCOUNT>0
 			ROLLBACK TRANSACTION modificarPeriodo;
+		SELECT -1
+	END CATCH
+SET NOCOUNT OFF
+END
+GO
+
+IF OBJECT_ID('[dbo].[GetPeriodo]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[GetPeriodo] 
+END 
+GO
+CREATE PROC [dbo].[GetPeriodo]
+AS
+BEGIN
+SET NOCOUNT ON
+	BEGIN TRY
+		SELECT Id,AnioInicio,AnioFin
+		FROM dbo.Periodo
+	END TRY
+
+	BEGIN CATCH
 		SELECT -1
 	END CATCH
 SET NOCOUNT OFF

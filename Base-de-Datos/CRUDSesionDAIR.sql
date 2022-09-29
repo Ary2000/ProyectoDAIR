@@ -52,7 +52,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT Nombre,Fecha,HoraInicio,HoraFin
+		SELECT Id,Nombre,Fecha,HoraInicio,HoraFin
 		FROM dbo.SesionDAIR
 		WHERE [Id] = @Id
 	END TRY

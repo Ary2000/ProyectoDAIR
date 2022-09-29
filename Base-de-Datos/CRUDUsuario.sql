@@ -51,7 +51,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT Nombre, Contrasenia
+		SELECT Id, Nombre, Contrasenia
 		FROM dbo.Usuario
 		WHERE [Id] = @Id
 	END TRY
