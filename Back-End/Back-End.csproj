@@ -131,7 +131,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Sesiones.cshtml" />
+    <Content Include="Views\Home\SesionesAIR.cshtml" />
+    <Content Include="Views\Home\SesionAIR.cshtml" />
+    <Content Include="Views\Home\SesionesDAIR.cshtml" />
+    <Content Include="Views\Home\Propuesta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

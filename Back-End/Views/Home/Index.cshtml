@@ -37,7 +37,8 @@
             <img class="card--img" src="~/src/folder.png" alt="Card image cap">
             <div class="card--body">
                 <h4 class="card--title">Sesiones de AIR</h4>
-                @Html.RouteLink("Ingresar", "Sesiones", new { controller = "Home", action = "Sesiones" }, new { @class="btn btn-primary"})
+                @Html.RouteLink("AIR", "SesionesAIR", new { controller = "Home", action = "SesionesAIR" }, new { @class = "btn btn-primary" })
+                @Html.RouteLink("DAIR", "SesionesDAIR", new { controller = "Home", action = "SesionesDAIR" }, new { @class = "btn btn-primary" })
             </div>
         </div>
         <div class="card">

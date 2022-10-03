@@ -1,7 +1,6 @@
 ﻿@using System.Data
 @model System.Data.DataTable
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Software DAIR</title>
-    <link rel="stylesheet" href="../styles/sesiones.css">
-    <link rel="shortcut icon" href="../src/logo.png">
+    <link rel="stylesheet" href="~/styles/sesiones.css">
+    <link rel="shortcut icon" href="~/src/logo.png">
     <!-- CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <!-- Fontawesome -->
@@ -22,11 +21,11 @@
 <header>
     <nav class="navbar">
         <div class="container-fluid">
-            <h5 class="navbar--tittle"> Sesiones </h5>
-            <button type="button" class="navbar--button">
-                <h5 class="navbar--cerrar--sesion"> Cerrar sesión </h5>
-                <img class="navbar--icon" src="../src/salir.png" alt="Salir">
-            </button>
+            <h5 class="navbar--tittle"> Sesiones de AIR </h5>
+            <a href="./login.html" class="navbar--button">
+                <h5 href="./login.html" class="navbar--cerrar--sesion"> Cerrar sesión </h5>
+                <img class="navbar--icon" src="~/src/salir.png" alt="Salir">
+            </a>
         </div>
     </nav>
 </header>
@@ -46,12 +45,8 @@
                         <label class="category-label" for="Todas">Todas</label>
                     </li>
                     <li>
-                        <input type="radio" name="radios" id="AIR" value="AIR">
-                        <label class="category-label" for="AIR">AIR</label>
-                    </li>
-                    <li>
-                        <input type="radio" name="radios" id="DAIR" value="DAIR">
-                        <label class="category-label" for="DAIR">DAIR</label>
+                        <input type="radio" name="radios" id="PERIODO" value="PERIODO">
+                        <label class="category-label" for="PERIODO">Periodo</label>
                     </li>
 
                 </ul>
@@ -67,29 +62,33 @@
                         <th scope="col">#</th>
                         <th scope="col">Periodo</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Detalles</th>
+                        <th scope="col">Fecha/Hora</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Borrar</th>
+                        <th scope="col">Basura</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (DataRow row in Model.Rows)
                     {
                         <tr>
-                            <th scope="row">@row["id"].ToString()</th>
-                            <td>@(row["Inicio"].ToString() + "-" + row["Fin"].ToString())</td>
+                            <th scope="row">@row["Id"].ToString()</th>
+                            <td>@(row["AnioInicio"].ToString() + "-" + row["AnioFin"].ToString())</td>
                             <td>@row["Nombre"]</td>
                             <td>@row["Fecha"]</td>
                             <td>@Html.RouteLink("Ver detalles", "", null, new { @class = "btn btn-primary" })</td>
+                            <td>@Html.RouteLink("Editar", "", null, new { @class = "btn btn-secondary btn-sm" })</td>
+                            <td>@Html.RouteLink("Borrar", "", null, new { @class = "btn btn-secondary btn-sm" })</td>
+                            <td>@Html.RouteLink("Propuesta", "Propuesta", new { controller="Home", path= "C:\\Users\\aryel\\OneDrive\\Desktop\\TEC\\ArchivoDocumentacion-TP1BD2-DuranAryEl-RodriguezUlises.pdf" }, new { @class = "btn btn-secondary btn-sm" })</td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
         <div class="footer--container">
-            @Html.RouteLink("Volver", "Default", new {action = String.Empty}, new { @class = "btn btn-secondary" })
-            <button id="searchBtn" type="button" class="btn btn-secondary btn-search">
-                <span class="label-icon">Crear </span>
-            </button>
+            <a href="./menu.html" class="btn btn-secondary btn-back"> Volver </a>
+            <a href="./registro-sesion-air.html" class="btn btn-primary btn-create"> Crear </a>
         </div>
 </body>
 </html>
