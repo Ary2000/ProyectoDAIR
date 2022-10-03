@@ -113,6 +113,7 @@
     <Content Include="styles\menu.css" />
     <Content Include="styles\padron.css" />
     <Content Include="styles\registro-asistencia.css" />
+    <Content Include="styles\registro-propuestas.css" />
     <Content Include="styles\sesiones.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -135,6 +136,7 @@
     <Content Include="Views\Home\SesionAIR.cshtml" />
     <Content Include="Views\Home\SesionesDAIR.cshtml" />
     <Content Include="Views\Home\Propuesta.cshtml" />
+    <Content Include="Views\Home\EditarSesionAIR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -52,5 +52,20 @@ namespace Back_End.Controllers
         {
             return File(path, "application/pdf");
         }
+
+        [Route("Home/EditarSesionAIR")]
+        // https://stackoverflow.com/questions/11100981/asp-net-mvc-open-pdf-file-in-new-window
+        public ActionResult EditarSesionAIR(/*string id*/)
+        {
+            /*SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC ReadSesionAIR " + id, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);*/
+            return View();
+            //return File(path, "application/pdf");
+        }
     }
 }
