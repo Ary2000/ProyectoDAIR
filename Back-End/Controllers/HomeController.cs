@@ -45,7 +45,76 @@ namespace Back_End.Controllers
             return View(dt);
 
         }
+        
+        [Route("Home/SesionAIR")]
 
+        public ActionResult SesionAIR(string id)
+        {
+            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            conection.Open();
+            SqlCommand cmd = new SqlCommand("EXEC ReadSesionAIR " + id, conection);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable datatable = new DataTable();
+            conection.Close();
+            data.Fill(datatable);
+            return View(datatable);
+        }
+
+        [Route("Home/SesionDAIR")]
+
+        public ActionResult SesionDAIR(string id)
+        {
+            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            conection.Open();
+            SqlCommand cmd = new SqlCommand("EXEC ReadSesionDAIR " + id, conection);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable datatable = new DataTable();
+            conection.Close();
+            data.Fill(datatable);
+            return View(datatable);
+        }
+
+        [Route("Home/CrearSesionAIR")]
+
+        public ActionResult CrearSesionAIR()
+        {
+            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            conection.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.Periodo;", conection);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable datatable = new DataTable();
+            conection.Close();
+            data.Fill(datatable);
+            return View(datatable);
+        }
+
+        [Route("Home/GuardarNuevaSesionAIR")]
+
+        public JavaScriptResult GuardarNuevaSesionAIR(string nombre, int periodoID, DateTime fecha, string horaIni, string horaFin, string descrip, string link)
+        {
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            connection.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("EXEC CreateSesionAIR " +
+                periodoID + ", " +
+                nombre + ", " +
+                fecha + ", " +
+                horaIni + ", " +
+                horaFin + ", " +
+                descrip + ", " +
+                link,
+                connection);
+                connection.Close();
+                return JavaScript("alert('no se que ha pasado')"); ;
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                throw ex;
+            }
+        }
+        
         [Route("Home/Propuesta")]
         // https://stackoverflow.com/questions/11100981/asp-net-mvc-open-pdf-file-in-new-window
         public ActionResult Propuesta(string path)
