@@ -123,6 +123,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FormEditarDetallesSesionAIR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,10 +134,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SesionesAIR.cshtml" />
-    <Content Include="Views\Home\SesionAIR.cshtml" />
     <Content Include="Views\Home\SesionesDAIR.cshtml" />
     <Content Include="Views\Home\Propuesta.cshtml" />
     <Content Include="Views\Home\EditarSesionAIR.cshtml" />
+    <Content Include="Views\Home\VerPropuestaAIR.cshtml" />
+    <Content Include="Views\Home\VerSesionAIR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -146,7 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

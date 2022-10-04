@@ -8,6 +8,7 @@ using System.Data;
 using System.Configuration;
 using System.IO;
 using System.Text;
+using Back_End.Models;
 
 namespace Back_End.Controllers
 {
@@ -55,9 +56,9 @@ namespace Back_End.Controllers
 
         [Route("Home/EditarSesionAIR")]
         // https://stackoverflow.com/questions/11100981/asp-net-mvc-open-pdf-file-in-new-window
-        public ActionResult EditarSesionAIR(string id)
+        public ActionResult EditarSesionAIR()
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            /*SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
             SqlCommand cmd = new SqlCommand("EXEC ReadSesionAIR " + id, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -65,9 +66,19 @@ namespace Back_End.Controllers
             con.Close();
             da.Fill(dt);
             ViewBag.NombreSesionAIR = dt.Rows[0]["Nombre"];
-            ViewBag.FechaSesionAIR = dt.Rows[0]["Fecha"];
-            return View(dt);
+            ViewBag.FechaSesionAIR = dt.Rows[0]["Fecha"];*/
+            return View();
             //return File(path, "application/pdf");
+        }
+
+        [HttpPost]
+        public ActionResult EnviarEdicionSesionAIR(FormEditarDetallesSesionAIR model)
+        {
+            if (ModelState.IsValid)
+            {
+                System.Console.WriteLine("Se tiene la infomacion");
+            }
+            return RedirectToAction("SesionesAIR");
         }
 
         public ActionResult BorrarSesionAIR(string id)
