@@ -1,5 +1,6 @@
 ﻿@using System.Data
 @model Back_End.Models.FormEditarDetallesSesionAIR
+model.Id = ViewBag.Id;
 @{
     Layout = null;
     ViewBag.Title = "EditarSesionAIR";
@@ -39,83 +40,83 @@
 </header>
 
 <body>
-        @Html.AntiForgeryToken()
-        <div class="container">
-            <div class="search--container">
-                @using (Html.BeginForm("EnviarEdicionSesionAIR", "Home", FormMethod.Post))
-                {
-                    <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="search--container">
+            @using (Html.BeginForm($"EnviarEdicionSesionAIR/{ViewBag.ID}", "Home", FormMethod.Post))
+            {
+                <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
 
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="validationTooltip03">Nombre del Evento: </label>
-                                @Html.TextBoxFor(model => model.Nombre)
-                                @Html.ValidationMessageFor(model => model.Nombre)
-                            </div>
-
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label for="validationTooltip03">Fecha Sesión: </label>
-                                @Html.TextBoxFor(model => model.Fecha, new
-                           {
-                               @class = "form-control",
-                               type = "date"
-                           })
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="validationTooltip03">Hora Inicio: </label>
-                                @Html.TextBoxFor(model => model.TiempoInicial, new
-                           {
-                               @class = "form-control",
-                               type = "time"
-                           })
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="validationTooltip03">Hora Fin: </label>
-                                @Html.TextBoxFor(model => model.TiempoFinal, new
-                           {
-                               @class = "form-control",
-                               type = "time"
-                           })
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <label for="validationTooltip03">Descripción: </label>
-                                @Html.TextBoxFor(model => model.Descripcion, new
-                            {
-                               @class = "form-control",
-                               type = "text"
-                           })
-                                <label for="validationTooltip03">Link de Carpeta: </label>
-                                @Html.TextBoxFor(model => model.PathArchivo, new
-                           {
-                               @class = "form-control",
-                               type = "text"
-                           })
-                                <label for="validationTooltip03">Padrón: </label>
-                                @Html.TextBoxFor(model => model.Fecha, new
-                           {
-                               @class = "form-control",
-                               type = "file"
-                           })
-                            </div>
-                        </div>
-                        
-                        <div class="container--header">
-                            @Html.ActionLink("Volver", "SesionesAIR", new { @class = "btn btn-outline-secondary" });
-                            <button class="btn btn-outline-secondary" type="submit">Guardar</button>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip03">Nombre del Evento: </label>
+                            @Html.TextBoxFor(model => model.Nombre, new { placeholder = ViewBag.NombreSesionAIR, @class = "form-input" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
                         </div>
 
-                    </form>
-                }
-                </div>
-            <div class="table--container">
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationTooltip03">Fecha Sesión: </label>
+                            @Html.TextBoxFor(model => model.Fecha, new
+                       {
+                           @class = "form-control",
+                           type = "date"
+                       })
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationTooltip03">Hora Inicio: </label>
+                            @Html.TextBoxFor(model => model.TiempoInicial, new
+                       {
+                           @class = "form-control",
+                           type = "time"
+                       })
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationTooltip03">Hora Fin: </label>
+                            @Html.TextBoxFor(model => model.TiempoFinal, new
+                       {
+                           @class = "form-control",
+                           type = "time"
+                       })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationTooltip03">Descripción: </label>
+                            @Html.TextBoxFor(model => model.Descripcion, new
+                        {
+                           @class = "form-control",
+                           type = "text"
+                       })
+                            <label for="validationTooltip03">Link de Carpeta: </label>
+                            @Html.TextBoxFor(model => model.PathArchivo, new
+                       {
+                           @class = "form-control",
+                           type = "text"
+                       })
+                            <label for="validationTooltip03">Padrón: </label>
+                            @Html.TextBoxFor(model => model.Fecha, new
+                       {
+                           @class = "form-control",
+                           type = "file"
+                       })
+                        </div>
+                    </div>
 
-            </div>
-            <div class="footer--container">
-            </div>
+                    <div class="container--header">
+                        @Html.ActionLink("Volver", "SesionesAIR", new { @class = "btn btn-outline-secondary" });
+                        <button class="btn btn-outline-secondary" type="submit">Guardar</button>
+                    </div>
+
+                </form>
+            }
+        </div>
+        <div class="table--container">
+
+        </div>
+        <div class="footer--container">
+        </div>
 </body>
 
 </html>
