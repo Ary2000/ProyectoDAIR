@@ -200,5 +200,62 @@ namespace Back_End.Controllers
             ViewBag.Id = dt.Rows[0]["Id"].ToString();
             return View();
         }
+
+        
+        public ActionResult BorrarPropuestaAIR(String id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC DeletePropuestaAIR " + id, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);
+            return RedirectToAction("SesionesAIR");
+        }
+
+        [Route("Home/EditarPropuestaAIR")]
+        public ActionResult EditarPropuestaAIR(String id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC ReadPropuestaAIR " + id, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);
+            ViewBag.NombrePropuestaAIR = dt.Rows[0]["Nombre1"];
+            ViewBag.ID = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EnviarEdicionPropuestaAIR(FormEditarPropuestaAIR model)
+        {
+            if (ModelState.IsValid)
+            {
+                System.Console.WriteLine("Se tiene la infomacion");
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+
+                SqlCommand cmd = new SqlCommand("EXEC UpdatePropuestaAIR "
+                    + model.Id + ", '"
+                    + model.EtapaId + "', '"
+                    + model.Aprovado + "', '"
+                    + model.Nombre + "', '"
+                    + model.Link + "', '"
+                    + model.NumeroPropuesta + "', '"
+                    + model.VotosFavor + "', '"
+                    + model.VotosContra + "', '"
+                    + model.VotosBlanco + "'", con);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
+            }
+            return RedirectToAction("SesionesAIR");
+        }
+
     }
 }

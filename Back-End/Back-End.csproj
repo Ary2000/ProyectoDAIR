@@ -126,6 +126,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FormEditarPropuestaAIR.cs" />
     <Compile Include="Models\FormCrearSesionDAIR.cs" />
     <Compile Include="Models\FormCrearSesionAIR.cs" />
     <Compile Include="Models\FormEditarDetallesSesionAIR.cs" />
@@ -146,6 +147,7 @@
     <Content Include="Views\Home\SesionDAIR.cshtml" />
     <Content Include="Views\Home\SesionAIR.cshtml" />
     <Content Include="Views\Home\VerSesionAIR.cshtml" />
+    <Content Include="Views\Home\EditarPropuestaAIR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
