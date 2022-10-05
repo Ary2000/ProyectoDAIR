@@ -137,9 +137,26 @@ namespace Back_End.Controllers
             con.Close();
             da.Fill(dt);
             ViewBag.NombreSesionAIR = dt.Rows[0]["Nombre"];
-            ViewBag.FechaSesionAIR = dt.Rows[0]["Fecha"];
-            return View(dt);
+            ViewBag.Id = dt.Rows[0]["Id"].ToString();
+            return View();
             //return File(path, "application/pdf");
+        }
+
+        [HttpPost]
+        public ActionResult EnviarEdicionSesionAIR(FormEditarDetallesSesionAIR model)
+        {
+            if (ModelState.IsValid)
+            {
+                System.Console.WriteLine("Se tiene la infomacion");
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "'", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
+            }
+            return RedirectToAction("SesionesAIR");
         }
 
         public ActionResult BorrarSesionAIR(string id)

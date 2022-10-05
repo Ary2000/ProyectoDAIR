@@ -57,6 +57,11 @@ namespace Back_End
                 url: "{controller}/Propuesta",
                 defaults: new {controller = "Home"}
             );
+            routes.MapRoute(
+                name:"EnviarEdicionSesionAIR",
+                url: "{controller}/EnviarEdicionAIR",
+                defaults: new {controller = "Home"}
+            );
         }
     }
 }

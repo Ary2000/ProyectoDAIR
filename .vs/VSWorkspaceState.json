@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Back-End"
+    "\\Back-End",
+    "\\Back-End\\Models"
   ],
+  "SelectedNode": "\\Back-End\\Models\\EditarSesionAIR.cs",
   "PreviewInSolutionExplorer": false
 }
