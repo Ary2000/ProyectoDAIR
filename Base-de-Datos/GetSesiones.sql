@@ -14,7 +14,7 @@ SET NOCOUNT ON
 		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
-		ORDER BY S.Fecha
+		ORDER BY S.Fecha DESC
 	END TRY
 
 	BEGIN CATCH
@@ -38,7 +38,7 @@ SET NOCOUNT ON
 		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionDAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
-		ORDER BY S.Fecha
+		ORDER BY S.Fecha DESC
 	END TRY
 
 	BEGIN CATCH
