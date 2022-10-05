@@ -80,7 +80,7 @@
                             <td>@(row["AnioInicio"].ToString() + "-" + row["AnioFin"].ToString())</td>
                             <td>@row["Nombre"]</td>
                             <td>@row["Fecha"]</td>
-                            <td>@Html.RouteLink("Ver detalles", "", null, new { @class = "btn btn-primary" })</td>
+                            <td>@Html.RouteLink("Ver detalles", "SesionDAIR", new { id = row["Id"] }, new { @class = "btn btn-primary" })</td>
                             <td>@Html.RouteLink("Editar", "", null, new { @class = "btn btn-secondary btn-sm" })</td>
                             <td>@Html.RouteLink("Borrar", "", null, new { @class = "btn btn-secondary btn-sm" })</td>
                             <td>@Html.RouteLink("Propuesta", "Propuesta", new { controller = "Home", path = "C:\\Users\\aryel\\OneDrive\\Desktop\\TEC\\ArchivoDocumentacion-TP1BD2-DuranAryEl-RodriguezUlises.pdf" }, new { @class = "btn btn-secondary btn-sm" })</td>

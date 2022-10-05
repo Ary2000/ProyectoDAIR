@@ -102,8 +102,10 @@
     <Content Include="src\file.png" />
     <Content Include="src\folder.png" />
     <Content Include="src\logo.png" />
+    <Content Include="src\pencil.png" />
     <Content Include="src\salir.png" />
     <Content Include="src\search.png" />
+    <Content Include="src\trash.png" />
     <Content Include="src\user.svg" />
     <Content Include="src\users.png" />
     <Content Include="src\user_img.png" />
@@ -114,6 +116,7 @@
     <Content Include="styles\padron.css" />
     <Content Include="styles\registro-asistencia.css" />
     <Content Include="styles\registro-propuestas.css" />
+    <Content Include="styles\sesion.css" />
     <Content Include="styles\sesiones.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -123,6 +126,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FormCrearSesionDAIR.cs" />
+    <Compile Include="Models\FormCrearSesionAIR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,10 +138,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\SesionesAIR.cshtml" />
-    <Content Include="Views\Home\SesionAIR.cshtml" />
     <Content Include="Views\Home\SesionesDAIR.cshtml" />
     <Content Include="Views\Home\Propuesta.cshtml" />
     <Content Include="Views\Home\EditarSesionAIR.cshtml" />
+    <Content Include="Views\Home\CrearSesionAIR.cshtml" />
+    <Content Include="Views\Home\SesionDAIR.cshtml" />
+    <Content Include="Views\Home\SesionAIR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -146,7 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

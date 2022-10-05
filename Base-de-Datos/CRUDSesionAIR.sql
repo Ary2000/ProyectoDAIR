@@ -11,7 +11,9 @@ CREATE PROC [dbo].[CreateSesionAIR]
 	@Nombre NVARCHAR(64),
 	@Fecha DATE,
 	@Inicio TIME,
-	@Fin TIME
+	@Fin TIME,
+	@Descripcion NVARCHAR(200),
+	@Link NVARCHAR(200)
 AS
 BEGIN
 SET NOCOUNT ON
@@ -22,12 +24,16 @@ SET NOCOUNT ON
 										Nombre,
 										Fecha,
 										HoraInicio,
-										HoraFin)
+										HoraFin, 
+										Descripcion,
+										Link)
 			SELECT @Periodo,
 					@Nombre,
 					@Fecha,
 					@Inicio,
-					@Fin;
+					@Fin,
+					@Descripcion,
+					@Link;
 		COMMIT TRANSACTION nuevaSesionAIR;
 		SELECT @@Identity Id;
 	END TRY
