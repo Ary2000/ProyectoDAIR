@@ -147,7 +147,7 @@ namespace Back_End.Controllers
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
-            SqlCommand cmd = new SqlCommand("EXEC ReadPropuestaAIR " + id, con);
+            SqlCommand cmd = new SqlCommand("EXEC ReadSesionAIR " + id, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             con.Close();
