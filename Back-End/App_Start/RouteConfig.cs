@@ -48,6 +48,11 @@ namespace Back_End
                 defaults: new { controller = "Home", action = "CrearSesionAIR" }
             );
             routes.MapRoute(
+                name: "GuardarNuevaSesionAIR",
+                url: "{controller}/GuardarNuevaSesionAIR",
+                defaults: new { controller = "Home" }
+            );
+            routes.MapRoute(
                 name: "Propuesta",
                 url: "{controller}/Propuesta",
                 defaults: new {controller = "Home"}

@@ -8,6 +8,9 @@ using System.Data;
 using System.Configuration;
 using System.IO;
 using System.Text;
+using System.Web.UI.WebControls;
+using System.Reflection;
+using Back_End.Models;
 
 namespace Back_End.Controllers
 {
@@ -85,34 +88,34 @@ namespace Back_End.Controllers
             DataTable datatable = new DataTable();
             conection.Close();
             data.Fill(datatable);
-            return View(datatable);
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (DataRow row in datatable.Rows) {
+                items.Add(new SelectListItem { Text = row["AnioInicio"].ToString()+" - "+ row["AnioFin"].ToString(), Value = row["Id"].ToString() });
+            }
+            ViewBag.Periodo = items;
+            return View();
         }
 
-        [Route("Home/GuardarNuevaSesionAIR")]
-
-        public JavaScriptResult GuardarNuevaSesionAIR(string nombre, int periodoID, DateTime fecha, string horaIni, string horaFin, string descrip, string link)
-        {
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            connection.Open();
-            try
+        [HttpPost]
+        public ActionResult GuardarNuevaSesionAIR(FormCrearSesionAIR model){
+            if (ModelState.IsValid)
             {
-                SqlCommand cmd = new SqlCommand("EXEC CreateSesionAIR " +
-                periodoID + ", " +
-                nombre + ", " +
-                fecha + ", " +
-                horaIni + ", " +
-                horaFin + ", " +
-                descrip + ", " +
-                link,
-                connection);
-                connection.Close();
-                return JavaScript("alert('no se que ha pasado')"); ;
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("EXEC CreateSesionAIR "
+                    + model.Periodo + ", '"
+                    + model.Nombre + "', '"
+                    + model.Fecha + "', '"
+                    + model.TiempoInicial + "', '"
+                    + model.TiempoFinal + "', '"
+                    + model.Descripcion + "', '"
+                    + model.PathArchivo + "'", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
             }
-            catch (Exception ex)
-            {
-                connection.Close();
-                throw ex;
-            }
+            return RedirectToAction("SesionesAIR");
         }
         
         [Route("Home/Propuesta")]
