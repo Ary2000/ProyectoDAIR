@@ -62,7 +62,9 @@ CREATE TABLE SesionAIR(
 	  [Nombre]				NVARCHAR(64) NOT NULL,
 	  [Fecha]				DATE NOT NULL,
 	  [HoraInicio]			TIME NOT NULL,
-	  [HoraFin]				TIME NOT NULL
+	  [HoraFin]				TIME NOT NULL,
+	  [Descripcion]			NVARCHAR(200),
+	  [Link]		 	NVARCHAR(200)
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
 	  FOREIGN KEY ([PeriodoId]) REFERENCES dbo.Periodo ([ID])
 );
