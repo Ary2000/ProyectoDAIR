@@ -58,9 +58,17 @@ namespace Back_End.Controllers
             SqlCommand cmd = new SqlCommand("EXEC ReadSesionAIR " + id, conection);
             SqlDataAdapter data = new SqlDataAdapter(cmd);
             DataTable datatable = new DataTable();
-            conection.Close();
             data.Fill(datatable);
-            return View(datatable);
+            ViewBag.Nombre = datatable.Rows[0]["Nombre"];
+            ViewBag.Fecha = datatable.Rows[0]["Fecha"];
+            ViewBag.HoraInicio = datatable.Rows[0]["HoraInicio"];
+            ViewBag.HoraFinal = datatable.Rows[0]["HoraFin"];
+            SqlCommand cmd2 = new SqlCommand("EXEC GetPropuestasAIR " + id, conection);
+            SqlDataAdapter data2 = new SqlDataAdapter(cmd2);
+            DataTable datatable2 = new DataTable();
+            data2.Fill(datatable2);
+            conection.Close();
+            return View(datatable2);
         }
 
         [Route("Home/SesionDAIR")]
@@ -72,9 +80,17 @@ namespace Back_End.Controllers
             SqlCommand cmd = new SqlCommand("EXEC ReadSesionDAIR " + id, conection);
             SqlDataAdapter data = new SqlDataAdapter(cmd);
             DataTable datatable = new DataTable();
-            conection.Close();
             data.Fill(datatable);
-            return View(datatable);
+            ViewBag.Nombre = datatable.Rows[0]["Nombre"];
+            ViewBag.Fecha = datatable.Rows[0]["Fecha"];
+            ViewBag.HoraInicio = datatable.Rows[0]["HoraInicio"];
+            ViewBag.HoraFinal = datatable.Rows[0]["HoraFin"];
+            SqlCommand cmd2 = new SqlCommand("EXEC GetPropuestasAIR " + id, conection);
+            SqlDataAdapter data2 = new SqlDataAdapter(cmd2);
+            DataTable datatable2 = new DataTable();
+            data2.Fill(datatable2);
+            conection.Close();
+            return View(datatable2);
         }
 
         [Route("Home/CrearSesionAIR")]
@@ -131,7 +147,7 @@ namespace Back_End.Controllers
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             con.Open();
-            SqlCommand cmd = new SqlCommand("EXEC ReadSesionAIR " + id, con);
+            SqlCommand cmd = new SqlCommand("EXEC ReadPropuestaAIR " + id, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             con.Close();
@@ -169,6 +185,20 @@ namespace Back_End.Controllers
             con.Close();
             da.Fill(dt);
             return RedirectToAction("SesionesAIR");
+        }
+
+        public ActionResult PropuestaAIR(string id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC ReadSesionAIR " + id, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);
+            ViewBag.NombreSesionAIR = dt.Rows[0]["Nombre"];
+            ViewBag.Id = dt.Rows[0]["Id"].ToString();
+            return View();
         }
     }
 }

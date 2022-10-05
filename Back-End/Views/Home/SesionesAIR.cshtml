@@ -66,7 +66,6 @@
                         <th scope="col">Link</th>
                         <th scope="col">Editar</th>
                         <th scope="col">Borrar</th>
-                        <th scope="col">Basura</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,7 +79,6 @@
                             <td>@Html.RouteLink("Ver detalles", "SesionAIR", new { id = row["Id"] }, new { @class = "btn btn-primary" })</td>
                             <td>@Html.RouteLink("Editar", "EditarSesionAIR", new { id = row["Id"] }, new { @class = "btn btn-secondary btn-sm" })</td>
                             <td>@Html.ActionLink("Borrar", "BorrarSesionAIR", new { id = row["Id"] }, new { @class = "btn btn-secondary btn-sm" })</td>
-                            <td>@Html.RouteLink("Propuesta", "Propuesta", new { controller="Home", path= "C:\\Users\\aryel\\OneDrive\\Desktop\\TEC\\ArchivoDocumentacion-TP1BD2-DuranAryEl-RodriguezUlises.pdf" }, new { @class = "btn btn-secondary btn-sm" })</td>
                         </tr>
                     }
                 </tbody>
