@@ -187,6 +187,18 @@ namespace Back_End.Controllers
             return RedirectToAction("SesionesAIR");
         }
 
+        public ActionResult BorrarSesionDAIR(string id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC DeleteSesionDAIR " + id, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);
+            return RedirectToAction("SesionesDAIR");
+        }
+
         public ActionResult PropuestaAIR(string id)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
