@@ -14,6 +14,7 @@ SET NOCOUNT ON
 		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
+		WHERE S.Valido = 1
 		ORDER BY S.Fecha DESC
 	END TRY
 
@@ -38,6 +39,7 @@ SET NOCOUNT ON
 		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionDAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
+		WHERE S.Valido = 1
 		ORDER BY S.Fecha DESC
 	END TRY
 
@@ -62,7 +64,7 @@ SET NOCOUNT ON
 		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
-		WHERE S.Nombre LIKE '%' + @Entrada + '%'
+		WHERE S.Nombre LIKE '%' + @Entrada + '%' AND S.Valido = 1
 		ORDER BY S.Fecha
 	END TRY
 
@@ -87,7 +89,7 @@ SET NOCOUNT ON
 		SELECT S.Id,P.AnioInicio,P.AnioFin,S.Nombre,S.Fecha
 		FROM dbo.SesionDAIR S
 		INNER JOIN dbo.Periodo P ON P.Id = S.PeriodoId
-		WHERE S.Nombre LIKE '%' + @Entrada + '%'
+		WHERE S.Nombre LIKE '%' + @Entrada + '%' AND S.Valido = 1
 		ORDER BY S.Fecha
 	END TRY
 

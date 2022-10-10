@@ -26,14 +26,16 @@ SET NOCOUNT ON
 										HoraInicio,
 										HoraFin, 
 										Descripcion,
-										Link)
+										Link,
+										Valido)
 			SELECT @Periodo,
 					@Nombre,
 					@Fecha,
 					@Inicio,
 					@Fin,
 					@Descripcion,
-					@Link;
+					@Link,
+					1;
 		COMMIT TRANSACTION nuevaSesionAIR;
 		SELECT @@Identity Id;
 	END TRY
@@ -117,10 +119,37 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
+		DECLARE @TempPropuestas TABLE ( Sec INT IDENTITY(1,1),
+										PropuestaId INT)
+		
+		DECLARE @inicio INT,
+				@fin INT,
+				@tempId INT
+		
+		INSERT INTO @TempPropuestas(PropuestaId)
+		SELECT P.Id
+		FROM dbo.PropuestaAIR P
+		WHERE P.SesionAIRId = @Id
+		
+		SELECT @inicio = MIN(Sec),
+				@fin = MAX(Sec)
+		FROM @TempPropuestas
+		
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION eliminarSesionAIR
-			DELETE FROM dbo.SesionAIR
-			WHERE Id = @Id;
+			WHILE @inicio <= @fin
+				BEGIN
+					SELECT @tempId = PropuestaId
+					FROM @TempPropuestas
+					WHERE Sec = @inicio
+					EXEC DeletePropuestaAIR @tempId
+					
+					SET @inicio = @inicio + 1
+				END
+			
+			UPDATE dbo.SesionAIR
+			SET Valido = 0
+			WHERE Id = @Id
 		COMMIT TRANSACTION eliminarSesionAIR;
 		SELECT @Id;
 	END TRY

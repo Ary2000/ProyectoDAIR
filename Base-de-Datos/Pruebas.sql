@@ -107,13 +107,13 @@ EXEC dbo.UpdatePadron 301470147,2,1
 SELECT * FROM dbo.Padron
 
 ------------SesionAIR------------
-EXEC dbo.CreateSesionAIR 2,'AIR ordinaria Nº 104-2022','17/6/2021','8:00','12:00'
-EXEC dbo.CreateSesionAIR 2,'AIR ordinaria Nº 105-2022','16/9/2020','8:00','12:00'
-EXEC dbo.CreateSesionAIR 2,'AIR ordinaria Nº 106-2022','13/5/2021','8:00','12:00'
-EXEC dbo.CreateSesionAIR 1,'AIR ordinaria Nº 103-2022','16/9/2022','8:00','12:00'
-EXEC dbo.CreateSesionAIR 1,'AIR ordinaria Nº 102-2022','9/7/2022','8:00','12:00'
-EXEC dbo.CreateSesionAIR 1,'AIR extraordinaria Nº 101-2022','19/4/2022','8:00','12:00'
-EXEC dbo.CreateSesionAIR 1,'AIR ordinaria Nº 100-2022','26/2/2022','8:00','12:00'
+EXEC dbo.CreateSesionAIR 2,'AIR ordinaria Nº 104-2022','17/6/2021','8:00','12:00','',''
+EXEC dbo.CreateSesionAIR 2,'AIR ordinaria Nº 105-2022','16/9/2020','8:00','12:00','',''
+EXEC dbo.CreateSesionAIR 2,'AIR ordinaria Nº 106-2022','13/5/2021','8:00','12:00','',''
+EXEC dbo.CreateSesionAIR 1,'AIR ordinaria Nº 103-2022','16/9/2022','8:00','12:00','',''
+EXEC dbo.CreateSesionAIR 1,'AIR ordinaria Nº 102-2022','9/7/2022','8:00','12:00','',''
+EXEC dbo.CreateSesionAIR 1,'AIR extraordinaria Nº 101-2022','19/4/2022','8:00','12:00','',''
+EXEC dbo.CreateSesionAIR 1,'AIR ordinaria Nº 100-2022','26/2/2022','8:00','12:00','',''
 
 SELECT * FROM dbo.SesionAIR
 EXEC dbo.ReadSesionAIR 1
@@ -182,7 +182,7 @@ EXEC dbo.DeleteAsistenciaDAIR 1
 EXEC dbo.NuevoRegistroDAIR 2
 SELECT * FROM dbo.RegistroAsistenciaDAIR
 
-------------Registro Asistencia DAIR------------
+------------Propuesta DAIR------------
 EXEC CreatePropuestaDAIR 1, 'Reintegracion de los autobuses en la noche',0,'www.link.com'
 EXEC CreatePropuestaDAIR 1, 'Prpuesta 2',1,'www.link.com'
 EXEC CreatePropuestaDAIR 1, 'Propuesta 3',0,'www.link.com'
@@ -201,7 +201,7 @@ EXEC DeletePropuestaDAIR 6
 EXEC ReadPropuestaDAIR 6
 SELECT * FROM dbo.PropuestaDAIR
 
-------------Registro Asistencia AIR------------
+------------Propuesta AIR------------
 EXEC CreatePropuestaAIR 1,1,1, 'Reintegracion de los autobuses en la noche','www.link.com',1,172,24,4
 EXEC CreatePropuestaAIR 1,2,1, 'Prpuesta 2','www.link.com',2,100,50,50
 EXEC CreatePropuestaAIR 1,1,0, 'Propuesta 3','www.link.com',3,100,60,40

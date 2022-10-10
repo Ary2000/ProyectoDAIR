@@ -22,12 +22,14 @@ SET NOCOUNT ON
 										Nombre,
 										Fecha,
 										HoraInicio,
-										HoraFin)
+										HoraFin,
+										Valido)
 			SELECT @Periodo,
 					@Nombre,
 					@Fecha,
 					@Inicio,
-					@Fin;
+					@Fin,
+					1;
 		COMMIT TRANSACTION nuevaSesionDAIR;
 		SELECT @@Identity Id;
 	END TRY
@@ -113,8 +115,13 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION eliminarSesionDAIR
-			DELETE FROM dbo.SesionDAIR
-			WHERE Id = @Id;
+			UPDATE dbo.PropuestaDAIR
+			SET Valido = 0
+			WHERE SesionDAIRId = @Id
+			
+			UPDATE dbo.SesionDAIR
+			SET Valido = 0
+			WHERE Id = @Id
 		COMMIT TRANSACTION eliminarSesionDAIR;
 		SELECT @Id;
 	END TRY
