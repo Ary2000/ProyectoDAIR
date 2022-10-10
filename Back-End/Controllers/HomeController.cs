@@ -35,6 +35,7 @@ namespace Back_End.Controllers
             da.Fill(dt);
             return View(dt);
         }
+        
         [Route("Home/SesionesDAIR")]
         public ActionResult SesionesDAIR()
         {
@@ -50,7 +51,6 @@ namespace Back_End.Controllers
         }
         
         [Route("Home/SesionAIR")]
-
         public ActionResult SesionAIR(string id)
         {
             SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
@@ -72,7 +72,6 @@ namespace Back_End.Controllers
         }
 
         [Route("Home/SesionDAIR")]
-
         public ActionResult SesionDAIR(string id)
         {
             SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
@@ -85,7 +84,7 @@ namespace Back_End.Controllers
             ViewBag.Fecha = datatable.Rows[0]["Fecha"];
             ViewBag.HoraInicio = datatable.Rows[0]["HoraInicio"];
             ViewBag.HoraFinal = datatable.Rows[0]["HoraFin"];
-            SqlCommand cmd2 = new SqlCommand("EXEC GetPropuestasAIR " + id, conection);
+            SqlCommand cmd2 = new SqlCommand("EXEC GetPropuestasDAIR " + id, conection);
             SqlDataAdapter data2 = new SqlDataAdapter(cmd2);
             DataTable datatable2 = new DataTable();
             data2.Fill(datatable2);
@@ -94,7 +93,6 @@ namespace Back_End.Controllers
         }
 
         [Route("Home/CrearSesionAIR")]
-
         public ActionResult CrearSesionAIR()
         {
             SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
@@ -133,7 +131,52 @@ namespace Back_End.Controllers
             }
             return RedirectToAction("SesionesAIR");
         }
-        
+
+
+
+        [Route("Home/CrearSesionDAIR")]
+        public ActionResult CrearSesionDAIR()
+        {
+            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            conection.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.Periodo;", conection);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable datatable = new DataTable();
+            conection.Close();
+            data.Fill(datatable);
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (DataRow row in datatable.Rows)
+            {
+                items.Add(new SelectListItem { Text = row["AnioInicio"].ToString() + " - " + row["AnioFin"].ToString(), Value = row["Id"].ToString() });
+            }
+            ViewBag.Periodo = items;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GuardarNuevaSesionDAIR(FormCrearSesionDAIR model)
+        {
+            if (ModelState.IsValid)
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("EXEC CreateSesionDAIR "
+                    + model.Periodo + ", '"
+                    + model.Nombre + "', '"
+                    + model.Fecha + "', '"
+                    + model.TiempoInicial + "', '"
+                    + model.TiempoFinal + "', '"
+                    + model.Descripcion + "', '"
+                    + model.PathArchivo + "'", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
+            }
+            return RedirectToAction("SesionesDAIR");
+        }
+
+
         [Route("Home/Propuesta")]
         // https://stackoverflow.com/questions/11100981/asp-net-mvc-open-pdf-file-in-new-window
         public ActionResult Propuesta(string path)
