@@ -148,6 +148,7 @@
     <Content Include="Views\Home\SesionAIR.cshtml" />
     <Content Include="Views\Home\VerSesionAIR.cshtml" />
     <Content Include="Views\Home\EditarPropuestaAIR.cshtml" />
+    <Content Include="Views\Home\CrearSesionDAIR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
