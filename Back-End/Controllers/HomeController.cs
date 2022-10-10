@@ -153,6 +153,7 @@ namespace Back_End.Controllers
             con.Close();
             da.Fill(dt);
             ViewBag.NombreSesionAIR = dt.Rows[0]["Nombre"];
+            ViewBag.LinkAIR = dt.Rows[0]["Link"];
             ViewBag.Id = dt.Rows[0]["Id"].ToString();
             return View();
             //return File(path, "application/pdf");
@@ -166,7 +167,7 @@ namespace Back_End.Controllers
                 System.Console.WriteLine("Se tiene la infomacion");
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "'", con);
+                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "', '" + model.PathArchivo + "'", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 con.Close();
@@ -187,6 +188,7 @@ namespace Back_End.Controllers
             con.Close();
             da.Fill(dt);
             ViewBag.NombreSesionAIR = dt.Rows[0]["Nombre"];
+            ViewBag.LinkAIR = dt.Rows[0]["Link"];
             ViewBag.Id = dt.Rows[0]["Id"].ToString();
             return View();
             //return File(path, "application/pdf");
@@ -200,7 +202,7 @@ namespace Back_End.Controllers
                 System.Console.WriteLine("Se tiene la infomacion");
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionDAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "'", con);
+                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionDAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "', '" + model.PathArchivo + "'", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 con.Close();

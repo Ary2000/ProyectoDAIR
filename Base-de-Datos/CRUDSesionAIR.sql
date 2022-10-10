@@ -60,7 +60,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT Id,Nombre,Fecha,HoraInicio,HoraFin
+		SELECT Id,Nombre,Fecha,HoraInicio,HoraFin,Link
 		FROM dbo.SesionAIR
 		WHERE [Id] = @Id
 	END TRY
@@ -82,7 +82,8 @@ CREATE PROC [dbo].[UpdateSesionAIR]
 	@Nombre NVARCHAR(64),
 	@Fecha DATE,
 	@Inicio TIME,
-	@Fin TIME
+	@Fin TIME,
+	@Link NVARCHAR(256)
 AS
 BEGIN
 SET NOCOUNT ON
@@ -93,7 +94,8 @@ SET NOCOUNT ON
 			SET Nombre = @Nombre,
 				Fecha = @Fecha,
 				HoraInicio = @Inicio,
-				HoraFin = @Fin
+				HoraFin = @Fin,
+				Link = @Link
 			WHERE Id = @Id
 		COMMIT TRANSACTION modificarSesionAIR;
 		SELECT @Id;
