@@ -40,7 +40,7 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SELECT Id,Nombre,Aprovado,Link
 		FROM dbo.PropuestaDAIR
-		WHERE Id = @SesionId
+		WHERE SesionDAIRId = @SesionId
 	END TRY
 
 	BEGIN CATCH
