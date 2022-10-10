@@ -12,6 +12,7 @@ namespace Back_End.Models
         [Required]
         public string SesionAIRId { get; set; }
         [Required]
+
         public string EtapaId { get; set; }
         [Required]
         public string Nombre { get; set; }

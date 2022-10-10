@@ -62,11 +62,29 @@ namespace Back_End
                 url: "{controller}/EnviarEdicionAIR",
                 defaults: new {controller = "Home"}
             );
+
+            //EDITAR PROPUESTA AIR
             routes.MapRoute(
                name: "EditarPropuestaAIR",
                url: "{controller}/EditarPropuestaAIR",
-               defaults: new { controller = "Home", action = "Index" }
+               defaults: new { controller = "Home" }//, action = "Index" }
            );
+            routes.MapRoute(
+                name: "EnviarEdicionPropuestaAIR",
+                url: "{controller}/EnviarEdicionPropuestaAIR",
+                defaults: new { controller = "Home" }
+            );
+            //CREAR PROPUESTA AIR
+            routes.MapRoute(
+                name: "CrearPropuestaAIR",
+                url: "{controller}/CrearPropuestaAIR",
+                defaults: new { controller = "Home" }//, action = "CrearPropuestaAIR" }
+            );
+            routes.MapRoute(
+                name: "GuardarNuevaPropuestaAIR",
+                url: "{controller}/GuardarNuevaPropuestaAIR",
+                defaults: new { controller = "Home" }
+            );
 
 
         }

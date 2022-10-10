@@ -214,6 +214,8 @@ namespace Back_End.Controllers
             return RedirectToAction("SesionesAIR");
         }
 
+
+        //EDITAR PROPUESTA AIR
         [Route("Home/EditarPropuestaAIR")]
         public ActionResult EditarPropuestaAIR(String id)
         {
@@ -249,6 +251,52 @@ namespace Back_End.Controllers
                     + model.VotosContra + "', '"
                     + model.VotosBlanco + "'", con);
 
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
+            }
+            return RedirectToAction("SesionesAIR");
+        }
+
+        //CREAR PROPUESTA AIR
+        [Route("Home/CrearPropuestaAIR")]
+        public ActionResult CrearPropuestaAIR(String SesionAIRId)
+        {
+            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            conection.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.Etapa;", conection);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable datatable = new DataTable();
+            conection.Close();
+            data.Fill(datatable);
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (DataRow row in datatable.Rows)
+            {
+                items.Add(new SelectListItem { Text = row["Nombre"].ToString(), Value = row["Id"].ToString() });
+            }
+            ViewBag.Etapa = items;
+            ViewBag.SesionAIRId = SesionAIRId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GuardarNuevaPropuestaAIR(FormCrearPropuestaAIR model)
+        {
+            if (!ModelState.IsValid)
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("EXEC CreatePropuestaAIR "
+                    + model.SesionAIRId + "',"
+                    + model.EtapaId + "', '"
+                    + model.Aprovado + "', '"
+                    + model.Nombre + "', '"
+                    + model.Link + "', '"
+                    + model.NumeroPropuesta + "', '"
+                    + model.VotosFavor + "', '"
+                    + model.VotosContra + "', '"
+                    + model.VotosBlanco + "'", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 con.Close();

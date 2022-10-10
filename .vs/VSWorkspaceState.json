@@ -8,6 +8,6 @@
     "\\Back-End\\Views",
     "\\Back-End\\Views\\Home"
   ],
-  "SelectedNode": "\\Back-End\\App_Start\\RouteConfig.cs",
+  "SelectedNode": "\\Back-End\\Views\\Home\\EditarPropuestaAIR.cshtml",
   "PreviewInSolutionExplorer": false
 }

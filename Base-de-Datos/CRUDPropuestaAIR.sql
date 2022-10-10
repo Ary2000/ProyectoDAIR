@@ -31,15 +31,15 @@ SET NOCOUNT ON
 										VotosAFavor,
 										VotosEnContra,
 										VotosEnBlanco)
-			SELECT @SesionAIR,
-					@Etapa,
-					@Aprovado,
-					@Nombre,
-					@Link,
-					@NumeroPropuesta,
-					@AFavor,
-					@EnContra,
-					@EnBlanco;
+			SELECT SesionAIRId,
+					EtapaId,
+					Aprovado,
+					Nombre,
+					Link,
+					NumeroDePropuesta,
+					VotosAFavor,
+					VotosEnContra,
+					VotosEnBlanco;
 		COMMIT TRANSACTION nuevaPropuestaAIR;
 		SELECT @@Identity Id;
 	END TRY
