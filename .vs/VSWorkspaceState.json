@@ -8,6 +8,6 @@
     "\\Back-End\\Views",
     "\\Back-End\\Views\\Home"
   ],
-  "SelectedNode": "\\Back-End\\Views\\Home\\EditarPropuestaAIR.cshtml",
+  "SelectedNode": "\\Back-End\\Models\\EditarSesionAIR.cs",
   "PreviewInSolutionExplorer": false
 }
