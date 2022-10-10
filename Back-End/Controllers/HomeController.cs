@@ -175,6 +175,40 @@ namespace Back_End.Controllers
             return RedirectToAction("SesionesAIR");
         }
 
+        [Route("Home/EditarSesionDAIR")]
+        // https://stackoverflow.com/questions/11100981/asp-net-mvc-open-pdf-file-in-new-window
+        public ActionResult EditarSesionDAIR(string id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC ReadSesionDAIR " + id, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);
+            ViewBag.NombreSesionAIR = dt.Rows[0]["Nombre"];
+            ViewBag.Id = dt.Rows[0]["Id"].ToString();
+            return View();
+            //return File(path, "application/pdf");
+        }
+
+        [HttpPost]
+        public ActionResult EnviarEdicionSesionDAIR(FormEditarDetallesSesionAIR model)
+        {
+            if (ModelState.IsValid)
+            {
+                System.Console.WriteLine("Se tiene la infomacion");
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionDAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "'", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
+            }
+            return RedirectToAction("SesionesDAIR");
+        }
+
         public ActionResult BorrarSesionAIR(string id)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
