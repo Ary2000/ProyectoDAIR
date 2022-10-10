@@ -85,7 +85,7 @@ namespace Back_End.Controllers
             ViewBag.Fecha = datatable.Rows[0]["Fecha"];
             ViewBag.HoraInicio = datatable.Rows[0]["HoraInicio"];
             ViewBag.HoraFinal = datatable.Rows[0]["HoraFin"];
-            SqlCommand cmd2 = new SqlCommand("EXEC GetPropuestasAIR " + id, conection);
+            SqlCommand cmd2 = new SqlCommand("EXEC GetPropuestasDAIR " + id, conection);
             SqlDataAdapter data2 = new SqlDataAdapter(cmd2);
             DataTable datatable2 = new DataTable();
             data2.Fill(datatable2);
