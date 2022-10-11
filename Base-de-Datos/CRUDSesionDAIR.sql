@@ -26,15 +26,15 @@ SET NOCOUNT ON
 										HoraInicio,
 										HoraFin, 
 										Descripcion,
-										Link
+										Link,
 										Valido)
 			SELECT @Periodo,
 					@Nombre,
 					@Fecha,
 					@Inicio,
 					@Fin,
-          @Descripcion,
-					@Link
+					@Descripcion,
+					@Link,
 					1;
 		COMMIT TRANSACTION nuevaSesionDAIR;
 		SELECT @@Identity Id;
