@@ -105,12 +105,12 @@
                                 {
                                     @:<td>Rechazado</td>
                                 }
-                                <td>
-                                    <a href="#" class="btn btn-secondary btn-sm btn-votacion">
-                                        Ver votación
-                                    </a>
-                                    @Html.RouteLink("Propuesta", "Propuesta", new { controller = "Home", path = row["Link"].ToString() }, new { @class = "btn btn-secondary btn-sm" })
-                                </td>
+                            <td>
+                                <a href="#" class="btn btn-secondary btn-sm btn-votacion">
+                                    Ver votación
+                                </a>
+                                <a href=@row["Link"].ToString() target="_blank" class="btn btn-secondary btn-sm">Propuesta</a>
+                            </td>
                                 <td>
                          
                                     @Html.RouteLink("Editar", "EditarPropuestaAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/pencil.png", alt = "Lapiz" })

@@ -91,7 +91,8 @@
         </div>
         <div class="footer--container">
             @Html.ActionLink("Volver", "/", null, new { @class = "btn btn-secondary btn-back" })
-            <a href="./registro-sesion-dair.html" class="btn btn-primary btn-create"> Crear </a>
+            @Html.ActionLink("Crear sesión DAIR", "CrearSesionDAIR", null, new { @class = "btn btn-primary btn-back" })
+
         </div>
 </body>
 </html>

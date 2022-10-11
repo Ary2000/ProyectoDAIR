@@ -42,20 +42,6 @@
 </header>
 
 <body>
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="info--votacion">
-                <h3>Votacion</h3>
-                <p>Votos a favor: 40</p>
-                <p>Votos en contra: 80</p>
-                <p>Votos nulos: 10</p>
-                <p>Votos en blanco: 2</p>
-            </div>
-            <a href="#" class="btn btn-primary ok" type="submit">OK</a>
-        </div>
-    </div>
     <div class="container-fluid container">
         <div class="container--header">
             <h4> @ViewBag.Nombre </h4>
@@ -109,10 +95,10 @@
                                     <a href="#" class="btn btn-secondary btn-sm btn-votacion">
                                         Ver votación
                                     </a>
-                                    @Html.RouteLink("Propuesta", "Propuesta", new { controller = "Home", path = row["Link"].ToString() }, new { @class = "btn btn-secondary btn-sm" })
+                                    <a href=@row["Link"].ToString() target="_blank" class="btn btn-secondary btn-sm">Propuesta</a>
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Editar", "EditarSesionAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/pencil.png", alt = "Lapiz" })
+                                    @Html.ActionLink("Editar", "EditarSesionDAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/pencil.png", alt = "Lapiz" })
                                     @Html.ActionLink("Borrar", "", null, new { @class = "accion--icon", src = "~/src/trash.png", alt = "Basurero" })
                                 </td>
 

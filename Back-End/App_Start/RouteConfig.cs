@@ -58,6 +58,16 @@ namespace Back_End
                 defaults: new { controller = "Home" }
             );
             routes.MapRoute(
+                name: "CrearSesionDAIR",
+                url: "{controller}/CrearSesionDAIR",
+                defaults: new { controller = "Home", action = "CrearSesionDAIR" }
+            );
+            routes.MapRoute(
+                name: "GuardarNuevaSesionDAIR",
+                url: "{controller}/GuardarNuevaSesionDAIR",
+                defaults: new { controller = "Home" }
+            );
+            routes.MapRoute(
                 name: "Propuesta",
                 url: "{controller}/Propuesta",
                 defaults: new {controller = "Home"}
