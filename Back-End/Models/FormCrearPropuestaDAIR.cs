@@ -8,6 +8,7 @@ namespace Back_End.Models
 {
     public class FormCrearPropuestaDAIR
     {
+        [Required]
         public string SesionDAIRId { get; set; }
         [Required]
         public string Nombre { get; set; }

@@ -1,7 +1,5 @@
 ﻿@using System.Data
 @model Back_End.Models.FormCrearPropuestaDAIR
-ViewBag.SesionDAIRId=ViewBag.SesionDAIRId;
-model.SesionDAIRId = ViewBag.SesionDAIRId;
 @{
     Layout = null;
     ViewBag.Title = "CrearPropuestaDAIR";
@@ -71,7 +69,6 @@ model.SesionDAIRId = ViewBag.SesionDAIRId;
                         </div>
                     </div>
 
-
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
                             <label for="validationTooltip03">Link de la carpeta: </label>
@@ -81,12 +78,19 @@ model.SesionDAIRId = ViewBag.SesionDAIRId;
                            type = "form-input"
                        })
                         </div>
-
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="validationTooltip03">Sesion: </label>
+                            @Html.TextBoxFor(model => model.SesionDAIRId, new
+                        { ViewBag.SesionDAIRId, @class = "form-control",type="form-input", disabled = "true" })
+                            @Html.ValidationMessageFor(model => model.SesionDAIRId)
+                        </div>
                     </div>
 
                     <div class="container--header">
-                        @Html.ActionLink("Volver", "SesionesAIR", new { @class = "btn btn-outline-secondary" });
-                        <button class="btn btn-outline-secondary" value=ViewBag.SesionDAIRId type="submit">Guardar</button>
+                        @Html.ActionLink("Volver", "SesionesDAIR", new { @class = "btn btn-outline-secondary"});
+                        <button class="btn btn-outline-secondary" type="submit">Guardar</button>
                     </div>
 
                 </form>
