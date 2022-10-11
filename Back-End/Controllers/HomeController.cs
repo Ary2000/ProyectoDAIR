@@ -396,13 +396,12 @@ namespace Back_End.Controllers
         [HttpPost]
         public ActionResult GuardarNuevaPropuestaDAIR(FormCrearPropuestaDAIR model)
         {
-
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("EXEC CreatePropuestaDAIR "
-                    + 1 + ", '"
+                    + model.Id + ", '"
                     + model.Nombre + "', '"
                     + model.Aprovado + "', '"
                     + model.Link + "'", con);
@@ -447,7 +446,7 @@ namespace Back_End.Controllers
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("EXEC CreatePropuestaAIR "
-                    + model.SesionAIRId + ", '"
+                    + model.Id + ", '"
                     + model.EtapaId + "', '"
                     + model.Aprovado + "', '"
                     + model.Nombre + "', '"

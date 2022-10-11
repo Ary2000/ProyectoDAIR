@@ -43,7 +43,7 @@
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="search--container">
-            @using (Html.BeginForm($"GuardarNuevaPropuestaDAIR/{2}", "Home", FormMethod.Post))
+            @using (Html.BeginForm($"GuardarNuevaPropuestaDAIR/{ViewBag.SesionDAIRId}", "Home", FormMethod.Post))
 
             {
                 <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
@@ -79,15 +79,6 @@
                        })
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col-md-3 mb-3">
-                            <label for="validationTooltip03">Sesion: </label>
-                            @Html.TextBoxFor(model => model.SesionDAIRId, new
-                        { ViewBag.SesionDAIRId, @class = "form-control", type = "form-input", disabled = "true" })
-                            @Html.ValidationMessageFor(model => model.SesionDAIRId)
-                        </div>
-                    </div>
-
                     <div class="container--header">
                         @Html.ActionLink("Volver", "SesionesDAIR", new { @class = "btn btn-outline-secondary" });
                         <button class="btn btn-outline-secondary" type="submit">Guardar</button>

@@ -99,7 +99,7 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Editar", "EditarPropuestaDAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/pencil.png", alt = "Lapiz" })
-                                    @Html.ActionLink("Borrar", "", null, new { @class = "accion--icon", src = "~/src/trash.png", alt = "Basurero" })
+                                    @Html.ActionLink("Borrar", "BorrarPropuestaDAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/trash.png", alt = "Basurero" })
                                 </td>
 
                             </tr>
