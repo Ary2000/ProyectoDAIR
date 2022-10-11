@@ -20,11 +20,13 @@ SET NOCOUNT ON
 			INSERT INTO dbo.PropuestaDAIR(SesionDAIRId,
 										Nombre,
 										Aprovado,
-										Link)
+										Link,
+										Valido)
 			SELECT @SesionDAIR,
 					@Nombre,
 					@Aprovado,
-					@Link;
+					@Link,
+					1;
 		COMMIT TRANSACTION nuevaPropuestaDAIR;
 		SELECT @@Identity Id;
 	END TRY
@@ -108,8 +110,9 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION eliminarPropuestaDAIR
-			DELETE FROM dbo.PropuestaDAIR
-			WHERE Id = @Id;
+			UPDATE dbo.PropuestaDAIR
+			SET Valido = 0
+			WHERE Id = @Id
 		COMMIT TRANSACTION eliminarPropuestaDAIR;
 		SELECT @Id;
 	END TRY

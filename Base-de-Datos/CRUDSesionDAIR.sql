@@ -26,14 +26,16 @@ SET NOCOUNT ON
 										HoraInicio,
 										HoraFin, 
 										Descripcion,
-										Link)
+										Link
+										Valido)
 			SELECT @Periodo,
 					@Nombre,
 					@Fecha,
 					@Inicio,
 					@Fin,
-					@Descripcion,
-					@Link;
+          @Descripcion,
+					@Link
+					1;
 		COMMIT TRANSACTION nuevaSesionDAIR;
 		SELECT @@Identity Id;
 	END TRY
@@ -58,7 +60,7 @@ AS
 BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
-		SELECT Id,Nombre,Fecha,HoraInicio,HoraFin
+		SELECT Id,Nombre,Fecha,HoraInicio,HoraFin,Link
 		FROM dbo.SesionDAIR
 		WHERE [Id] = @Id
 	END TRY
@@ -80,7 +82,8 @@ CREATE PROC [dbo].[UpdateSesionDAIR]
 	@Nombre NVARCHAR(64),
 	@Fecha DATE,
 	@Inicio TIME,
-	@Fin TIME
+	@Fin TIME,
+	@Link NVARCHAR(256)
 AS
 BEGIN
 SET NOCOUNT ON
@@ -91,7 +94,8 @@ SET NOCOUNT ON
 			SET Nombre = @Nombre,
 				Fecha = @Fecha,
 				HoraInicio = @Inicio,
-				HoraFin = @Fin
+				HoraFin = @Fin,
+				Link = @Link
 			WHERE Id = @Id
 		COMMIT TRANSACTION modificarSesionDAIR;
 		SELECT @Id;
@@ -119,8 +123,13 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION eliminarSesionDAIR
-			DELETE FROM dbo.SesionDAIR
-			WHERE Id = @Id;
+			UPDATE dbo.PropuestaDAIR
+			SET Valido = 0
+			WHERE SesionDAIRId = @Id
+			
+			UPDATE dbo.SesionDAIR
+			SET Valido = 0
+			WHERE Id = @Id
 		COMMIT TRANSACTION eliminarSesionDAIR;
 		SELECT @Id;
 	END TRY

@@ -29,7 +29,7 @@
 <header>
     <nav class="navbar">
         <div class="container-fluid">
-            <h5 class="navbar--tittle"> Editar sesión AIR</h5>
+            <h5 class="navbar--tittle"> Editar sesión DAIR</h5>
             <a href="./login.html" class="navbar--button">
                 <h5 href="./login.html" class="navbar--cerrar--sesion"> Cerrar sesión </h5>
                 <img class="navbar--icon" src="~/src/salir.png" alt="Salir">
@@ -42,7 +42,7 @@
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="search--container">
-            @using (Html.BeginForm($"EnviarEdicionSesionAIR/{ViewBag.ID}", "Home", FormMethod.Post))
+            @using (Html.BeginForm($"EnviarEdicionSesionDAIR/{ViewBag.ID}", "Home", FormMethod.Post))
             {
                 <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
 
@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="container--header">
-                        @Html.ActionLink("Volver", "SesionesAIR", new { @class = "btn btn-outline-secondary" })
+                        @Html.ActionLink("Volver", "SesionesDAIR", new { @class = "btn btn-outline-secondary" })
                         <button class="btn btn-outline-secondary" type="submit">Guardar</button>
                     </div>
 

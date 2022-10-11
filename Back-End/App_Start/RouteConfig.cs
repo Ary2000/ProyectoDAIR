@@ -23,6 +23,11 @@ namespace Back_End
                 defaults: new {controller = "Home"}
             );
             routes.MapRoute(
+                name: "EditarSesionDAIR",
+                url: "{controller}/EditarSesionDAIR",
+                defaults: new { controller = "Home" }
+            );
+            routes.MapRoute(
                 name: "SesionesAIR",
                 url: "{controller}/SesionesAIR",
                 defaults: new { controller = "Home", action = "SesionesAIR" }
