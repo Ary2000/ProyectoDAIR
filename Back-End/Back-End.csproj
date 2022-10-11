@@ -126,7 +126,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FormCrearPropuestaDAIR.cs" />
     <Compile Include="Models\FormCrearPropuestaAIR.cs" />
+    <Compile Include="Models\FormEditarPropuestaDAIR.cs" />
     <Compile Include="Models\FormEditarPropuestaAIR.cs" />
     <Compile Include="Models\FormCrearSesionDAIR.cs" />
     <Compile Include="Models\FormCrearSesionAIR.cs" />
@@ -150,6 +152,8 @@
     <Content Include="Views\Home\VerSesionAIR.cshtml" />
     <Content Include="Views\Home\EditarPropuestaAIR.cshtml" />
     <Content Include="Views\Home\CrearPropuestaAIR.cshtml" />
+    <Content Include="Views\Home\EditarPropuestaDAIR.cshtml" />
+    <Content Include="Views\Home\CrearPropuestaDAIR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

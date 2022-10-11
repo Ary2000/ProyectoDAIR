@@ -86,6 +86,30 @@ namespace Back_End
                 defaults: new { controller = "Home" }
             );
 
+            //EDITAR PROPUESTA DAIR
+            routes.MapRoute(
+               name: "EditarPropuestaDAIR",
+               url: "{controller}/EditarPropuestaDAIR",
+               defaults: new { controller = "Home" }//, action = "Index" }
+           );
+            routes.MapRoute(
+                name: "EnviarEdicionPropuestaDAIR",
+                url: "{controller}/EnviarEdicionPropuestaDAIR",
+                defaults: new { controller = "Home" }
+            );
+
+            //CREAR PROPUESTA DAIR
+            routes.MapRoute(
+                name: "CrearPropuestaDAIR",
+                url: "{controller}/CrearPropuestaDAIR",
+                defaults: new { controller = "Home" }//, action = "CrearPropuestaAIR" }
+            );
+            routes.MapRoute(
+                name: "GuardarNuevaPropuestaDAIR",
+                url: "{controller}/GuardarNuevaPropuestaDAIR",
+                defaults: new { controller = "Home" }
+            );
+
 
         }
     }

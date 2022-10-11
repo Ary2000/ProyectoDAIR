@@ -45,16 +45,6 @@
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <!-- Modal content -->
-        <div class="modal-content">
-            <div class="info--votacion">
-                <h3>Votacion</h3>
-                <p>Votos a favor: 40</p>
-                <p>Votos en contra: 80</p>
-                <p>Votos nulos: 10</p>
-                <p>Votos en blanco: 2</p>
-            </div>
-            <a href="#" class="btn btn-primary ok" type="submit">OK</a>
-        </div>
     </div>
     <div class="container-fluid container">
         <div class="container--header">
@@ -112,8 +102,8 @@
                                     @Html.RouteLink("Propuesta", "Propuesta", new { controller = "Home", path = row["Link"].ToString() }, new { @class = "btn btn-secondary btn-sm" })
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Editar", "EditarSesionAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/pencil.png", alt = "Lapiz" })
-                                    @Html.ActionLink("Borrar", "", null, new { @class = "accion--icon", src = "~/src/trash.png", alt = "Basurero" })
+                                    @Html.ActionLink("Editar", "EditarPropuestaDAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/pencil.png", alt = "Lapiz" })
+                                    @Html.ActionLink("Borrar", "BorrarPropuestaDAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/trash.png", alt = "Basurero" })
                                 </td>
 
                             </tr>
@@ -122,10 +112,11 @@
                     </tbody>
                 </table>
             </div>
-            <div class="container--header">
-                @Html.RouteLink("Volver", "SesionesDAIR", null, new { @class = "btn btn-outline-secondary" })
-                <a href="./registro-propuesta-air.html" class="btn btn-primary" type="submit">Agregar propuesta</a>
-            </div>
+                <div class="container--header">
+                    @Html.RouteLink("Volver", "SesionesDAIR", null, new { @class = "btn btn-outline-secondary" })
+                    @Html.RouteLink("Agregar Propuesta", "CrearPropuestaDAIR", new { SesionDAIRId= ViewBag.SesionDAIRId}, new { @class = "accion--icon" })
+                </div>
+            
         </form>
     </div>
 </body>
