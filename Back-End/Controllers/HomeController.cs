@@ -63,6 +63,7 @@ namespace Back_End.Controllers
             ViewBag.Fecha = datatable.Rows[0]["Fecha"];
             ViewBag.HoraInicio = datatable.Rows[0]["HoraInicio"];
             ViewBag.HoraFinal = datatable.Rows[0]["HoraFin"];
+            ViewBag.SesionAIRId = id;
             SqlCommand cmd2 = new SqlCommand("EXEC GetPropuestasAIR " + id, conection);
             SqlDataAdapter data2 = new SqlDataAdapter(cmd2);
             DataTable datatable2 = new DataTable();
@@ -84,6 +85,7 @@ namespace Back_End.Controllers
             ViewBag.Fecha = datatable.Rows[0]["Fecha"];
             ViewBag.HoraInicio = datatable.Rows[0]["HoraInicio"];
             ViewBag.HoraFinal = datatable.Rows[0]["HoraFin"];
+            ViewBag.SesionDAIRId = id;
             SqlCommand cmd2 = new SqlCommand("EXEC GetPropuestasDAIR " + id, conection);
             SqlDataAdapter data2 = new SqlDataAdapter(cmd2);
             DataTable datatable2 = new DataTable();
@@ -205,7 +207,7 @@ namespace Back_End.Controllers
         [HttpPost]
         public ActionResult EnviarEdicionSesionAIR(FormEditarDetallesSesionAIR model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 System.Console.WriteLine("Se tiene la infomacion");
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
@@ -230,8 +232,8 @@ namespace Back_End.Controllers
             DataTable dt = new DataTable();
             con.Close();
             da.Fill(dt);
-            ViewBag.NombreSesionAIR = dt.Rows[0]["Nombre"];
-            ViewBag.LinkAIR = dt.Rows[0]["Link"];
+            ViewBag.NombreSesionDAIR = dt.Rows[0]["Nombre"];
+            ViewBag.LinkDAIR = dt.Rows[0]["Link"];
             ViewBag.Id = dt.Rows[0]["Id"].ToString();
             return View();
             //return File(path, "application/pdf");
@@ -320,10 +322,27 @@ namespace Back_End.Controllers
             return View();
         }
 
+        //EDITAR PROPUESTA DAIR
+        [Route("Home/EditarPropuestaDAIR")]
+        public ActionResult EditarPropuestaDAIR(String id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC ReadPropuestaDAIR " + id, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);
+            ViewBag.NombrePropuestaDAIR = dt.Rows[0]["Nombre"];
+            ViewBag.ID = id;
+            ViewBag.Link = dt.Rows[0]["Link"];
+            return View();
+        }
+
         [HttpPost]
         public ActionResult EnviarEdicionPropuestaAIR(FormEditarPropuestaAIR model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 System.Console.WriteLine("Se tiene la infomacion");
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
@@ -348,5 +367,125 @@ namespace Back_End.Controllers
             return RedirectToAction("SesionesAIR");
         }
 
+
+        //BORRAR PROPUESTA DAIR
+        public ActionResult BorrarPropuestaDAIR(String id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC DeletePropuestaDAIR " + id, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);
+            return RedirectToAction("SesionesDAIR");
+        }
+
+        //CREAR PROPUESTA AIR
+        [Route("Home/CrearPropuestaDAIR")]
+        public ActionResult CrearPropuestaDAIR(String SesionDAIRId)
+        {
+            ViewBag.SesionDAIRId = SesionDAIRId.ToString();
+            List<SelectListItem> items_aprovado = new List<SelectListItem>();
+            items_aprovado.Add(new SelectListItem { Text = "Sí", Value = "1" });
+            items_aprovado.Add(new SelectListItem { Text = "No", Value = "0" });
+            ViewBag.Aprovado = items_aprovado;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GuardarNuevaPropuestaDAIR(FormCrearPropuestaDAIR model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("EXEC CreatePropuestaDAIR "
+                    + 1 + ", '"
+                    + model.Nombre + "', '"
+                    + model.Aprovado + "', '"
+                    + model.Link + "'", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
+            }
+            return RedirectToAction("SesionesDAIR");
+        }
+
+        //CREAR PROPUESTA AIR
+        [Route("Home/CrearPropuestaAIR")]
+        public ActionResult CrearPropuestaAIR(String SesionAIRId)
+        {
+            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            conection.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.Etapa;", conection);
+            SqlDataAdapter data = new SqlDataAdapter(cmd);
+            DataTable datatable = new DataTable();
+            conection.Close();
+            data.Fill(datatable);
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (DataRow row in datatable.Rows)
+            {
+                items.Add(new SelectListItem { Text = row["Nombre"].ToString(), Value = row["Id"].ToString() });
+            }
+            ViewBag.EtapaId = items;
+            ViewBag.SesionAIRId = SesionAIRId;
+            List<SelectListItem> items_aprovado = new List<SelectListItem>();
+            items_aprovado.Add(new SelectListItem { Text = "Sí", Value = "1" });
+            items_aprovado.Add(new SelectListItem { Text = "No", Value = "0" });
+            ViewBag.Aprovado = items_aprovado;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GuardarNuevaPropuestaAIR(FormCrearPropuestaAIR model)
+        {
+            if (!ModelState.IsValid)
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("EXEC CreatePropuestaAIR "
+                    + model.SesionAIRId + ", '"
+                    + model.EtapaId + "', '"
+                    + model.Aprovado + "', '"
+                    + model.Nombre + "', '"
+                    + model.Link + "', '"
+                    + model.NumeroPropuesta + "', '"
+                    + model.VotosFavor + "', '"
+                    + model.VotosContra + "', '"
+                    + model.VotosBlanco + "'", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
+            }
+            return RedirectToAction("SesionesAIR");
+        }
+        [HttpPost]
+        public ActionResult EnviarEdicionPropuestaDAIR(FormEditarPropuestaDAIR model)
+        {
+            if (!ModelState.IsValid)
+            {
+                System.Console.WriteLine("Se tiene la infomacion");
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                con.Open();
+
+                SqlCommand cmd = new SqlCommand("EXEC UpdatePropuestaDAIR "
+                    + model.Id + ", '"
+                    + model.Nombre + "', '"
+                    + model.Aprovado + "', '"
+                    + model.Link + "'", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Close();
+                da.Fill(dt);
+            }
+            return RedirectToAction("SesionesDAIR");
+        }
     }
+
+
+
 }
