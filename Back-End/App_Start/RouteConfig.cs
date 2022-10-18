@@ -118,7 +118,16 @@ namespace Back_End
                 url: "{controller}/GuardarNuevaPropuestaDAIR",
                 defaults: new { controller = "Home" }
             );
-
+            routes.MapRoute(
+                name: "AsistenciaAIR",
+                url: "{controller}/AsistenciaAIR",
+                defaults: new { controller = "Home" }
+            );
+            routes.MapRoute(
+                name: "AsistenciaSesionAIR",
+                url: "{controller}/Asistencia",
+                defaults: new { controller = "Home" }
+            );
         }
     }
 }
