@@ -492,7 +492,9 @@ namespace Back_End.Controllers
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             con.Close();
-            
+            da.Fill(dt);
+            return View(dt);
+
         }
         public ActionResult AsistenciaAIR()
         {

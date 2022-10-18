@@ -123,8 +123,8 @@ namespace Back_End
                url: "{controller}/Constancias",
                defaults: new { controller = "Home", action = "Constancias" }
            );
-
-                name: "AsistenciaAIR",
+            routes.MapRoute(
+               name: "AsistenciaAIR",
                 url: "{controller}/AsistenciaAIR",
                 defaults: new { controller = "Home" }
             );
