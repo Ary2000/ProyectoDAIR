@@ -1,0 +1,7 @@
+
+*.cache
+*.cache
+*.cache
+.vs/ProyectoDAIR/v17/.suo
+*.sqlite
+*.config
