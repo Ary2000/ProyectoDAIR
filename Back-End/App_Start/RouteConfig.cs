@@ -124,6 +124,15 @@ namespace Back_End
                defaults: new { controller = "Home", action = "Constancias" }
            );
 
+                name: "AsistenciaAIR",
+                url: "{controller}/AsistenciaAIR",
+                defaults: new { controller = "Home" }
+            );
+            routes.MapRoute(
+                name: "AsistenciaSesionAIR",
+                url: "{controller}/Asistencia",
+                defaults: new { controller = "Home" }
+            );
         }
     }
 }

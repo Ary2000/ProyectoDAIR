@@ -483,7 +483,6 @@ namespace Back_End.Controllers
             }
             return RedirectToAction("SesionesDAIR");
         }
-
         [Route("Home/Constancias")]
         public ActionResult Constancias()
         {
@@ -494,6 +493,27 @@ namespace Back_End.Controllers
             DataTable dt = new DataTable();
             con.Close();
             
+        }
+        public ActionResult AsistenciaAIR()
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC GetSesionesAIR", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            da.Fill(dt);
+            return View(dt);
+        }
+
+        public ActionResult AsistenciaSesionAIR(int id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand($"EXEC GetAsistenciaSesionAIR {id}", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
             da.Fill(dt);
             return View(dt);
         }
