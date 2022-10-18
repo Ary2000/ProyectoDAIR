@@ -483,6 +483,20 @@ namespace Back_End.Controllers
             }
             return RedirectToAction("SesionesDAIR");
         }
+
+        [Route("Home/Constancias")]
+        public ActionResult Constancias()
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("EXEC GetAsambleistas", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Close();
+            
+            da.Fill(dt);
+            return View(dt);
+        }
     }
 
 

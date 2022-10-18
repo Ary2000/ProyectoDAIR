@@ -118,6 +118,11 @@ namespace Back_End
                 url: "{controller}/GuardarNuevaPropuestaDAIR",
                 defaults: new { controller = "Home" }
             );
+            routes.MapRoute(
+               name: "Constancias",
+               url: "{controller}/Constancias",
+               defaults: new { controller = "Home", action = "Constancias" }
+           );
 
         }
     }
