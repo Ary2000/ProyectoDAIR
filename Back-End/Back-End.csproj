@@ -153,6 +153,8 @@
     <Content Include="Views\Home\EditarPropuestaAIR.cshtml" />
     <Content Include="Views\Home\EditarSesionDAIR.cshtml" />
     <Content Include="Views\Home\CrearSesionDAIR.cshtml" />
+    <Content Include="Views\Home\AsistenciaAIR.cshtml" />
+    <Content Include="Views\Home\AsistenciaSesionAIR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -162,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Padrones\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

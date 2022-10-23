@@ -45,7 +45,7 @@
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="search--container">
-            @using (Html.BeginForm("GuardarNuevaSesionAIR", "Home", FormMethod.Post))
+            @using (Html.BeginForm("GuardarNuevaSesionAIR", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
 
@@ -109,7 +109,7 @@
                            type = "text"
                        })
                             <label for="validationTooltip03">Padrón: </label>
-                            @Html.TextBoxFor(model => model.Fecha, new
+                            @Html.TextBox("file", "", new
                        {
                            @class = "form-control",
                            type = "file"
