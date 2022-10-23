@@ -113,13 +113,9 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public ActionResult GuardarNuevaSesionAIR(FormCrearSesionAIR model, HttpPostedFileBase file)
-        {
+        public ActionResult GuardarNuevaSesionAIR(FormCrearSesionAIR model){
             if (ModelState.IsValid)
             {
-                string FileName = Path.GetFileName(file.FileName);
-                string path = Path.Combine(Server.MapPath("~/Padrones"), FileName);
-                file.SaveAs(path);
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("EXEC CreateSesionAIR "
