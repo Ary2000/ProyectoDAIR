@@ -98,6 +98,7 @@
     <Content Include="Pages\padron.html" />
     <Content Include="Pages\registro-asistencia.html" />
     <Content Include="Pages\sesiones.html" />
+    <Content Include="src\bell.png" />
     <Content Include="src\check.png" />
     <Content Include="src\file.png" />
     <Content Include="src\folder.png" />
@@ -153,6 +154,7 @@
     <Content Include="Views\Home\EditarPropuestaAIR.cshtml" />
     <Content Include="Views\Home\EditarSesionDAIR.cshtml" />
     <Content Include="Views\Home\CrearSesionDAIR.cshtml" />
+    <Content Include="Views\Home\Notificaciones.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

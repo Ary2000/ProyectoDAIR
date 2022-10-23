@@ -23,7 +23,17 @@
     margin: 5px;
 }
 
-.container{
+.container--notification {
+    display: flex;
+    justify-content: right;
+}
+
+.btn-notify {
+    color: #fff;
+    margin: 20px;
+}
+
+.card--container {
     margin-top: 50px;
     display: flex;
     gap: 10px;

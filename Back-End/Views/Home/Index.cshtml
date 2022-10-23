@@ -33,35 +33,40 @@
 </header>
 <body>
     <div class="container">
-        <div class="card">
-            <img class="card--img" src="~/src/folder.png" alt="Card image cap">
-            <div class="card--body">
-                <h4 class="card--title">Sesiones de AIR</h4>
-                @Html.RouteLink("AIR", "SesionesAIR", new { controller = "Home", action = "SesionesAIR" }, new { @class = "btn btn-primary" })
-                @Html.RouteLink("DAIR", "SesionesDAIR", new { controller = "Home", action = "SesionesDAIR" }, new { @class = "btn btn-primary" })
+        <div class="container--notification">
+            @Html.RouteLink("Notificaciones", "Notificaciones", new { controller = "Home", action = "Notificaciones" }, new { @class = "btn btn-outline-secondary btn-notify btn-lg" })
+            
+        </div>
+        <div class="card--container">
+            <div class="card">
+                <img class="card--img" src="~/src/folder.png" alt="Card image cap">
+                <div class="card--body">
+                    <h4 class="card--title">Sesiones de AIR</h4>
+                    @Html.RouteLink("AIR", "SesionesAIR", new { controller = "Home", action = "SesionesAIR" }, new { @class = "btn btn-primary" })
+                    @Html.RouteLink("DAIR", "SesionesDAIR", new { controller = "Home", action = "SesionesDAIR" }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+            <div class="card">
+                <img class="card--img" src="~/src/check.png" alt="Card image cap">
+                <div class="card--body">
+                    <h4 class="card--title">Asistencia</h4>
+                    @Html.ActionLink("Ingresar", "AsistenciaAIR", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+            <div class="card">
+                <img class="card--img" src="~/src/file.png" alt="Card image cap">
+                <div class="card--body">
+                    <h4 class="card--title">Constancias</h4>
+                    @Html.ActionLink("Constancias", "Constancias", null, new { controller = "Home", action = "Constancias" }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+            <div class="card">
+                <img class="card--img" src="~/src/users.png" alt="Card image cap">
+                <div class="card--body">
+                    <h4 class="card--title">Padrón</h4>
+                    <a href="~/Pages/padron.html" class="btn btn-primary"> Ingresar </a>
+                </div>
             </div>
         </div>
-        <div class="card">
-            <img class="card--img" src="~/src/check.png" alt="Card image cap">
-            <div class="card--body">
-                <h4 class="card--title">Asistencia</h4>
-                @Html.ActionLink("Ingresar", "AsistenciaAIR", null, new { @class = "btn btn-primary" })
-            </div>
-        </div>
-        <div class="card">
-            <img class="card--img" src="~/src/file.png" alt="Card image cap">
-            <div class="card--body">
-                <h4 class="card--title">Constancias</h4>
-                @Html.ActionLink("Constancias", "Constancias", null, new { controller = "Home", action = "Constancias" }, new { @class = "btn btn-primary" })
-            </div>
-        </div>
-        <div class="card">
-            <img class="card--img" src="~/src/users.png" alt="Card image cap">
-            <div class="card--body">
-                <h4 class="card--title">Padrón</h4>
-                <a href="~/Pages/padron.html" class="btn btn-primary"> Ingresar </a>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

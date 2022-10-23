@@ -519,6 +519,12 @@ namespace Back_End.Controllers
             da.Fill(dt);
             return View(dt);
         }
+
+        [Route("Home/Notificaciones")]
+        public ActionResult Notificaciones()
+        {
+            return View();
+        }
     }
 
 
