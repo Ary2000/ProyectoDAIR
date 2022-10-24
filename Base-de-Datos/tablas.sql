@@ -7,7 +7,7 @@ GO
 
 CREATE TABLE Departamento(
 	  [Id]					INT NOT NULL IDENTITY(1,1),
-	  [Nombre]				NVARCHAR(32) NOT NULL,
+	  [Nombre]				NVARCHAR(128) NOT NULL,
 	  PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE Asambleista(
 	  [DepartamentoId]		INT NOT NULL,
 	  [SectorId]			INT NOT NULL,
 	  [SedeId]				INT NOT NULL,
-	  [Nombre]				NVARCHAR(64) NOT NULL,
+	  [Nombre]				NVARCHAR(128) NOT NULL,
 	  [Cedula]				NVARCHAR(16) NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
 	  FOREIGN KEY ([DepartamentoId]) REFERENCES dbo.Departamento ([ID]),

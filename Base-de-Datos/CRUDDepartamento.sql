@@ -22,7 +22,7 @@ SET NOCOUNT ON
 				END
 			ELSE
 				BEGIN
-					SELECT 0
+					SELECT Id FROM dbo.Departamento WHERE Nombre = @Nombre
 				END
 		COMMIT TRANSACTION nuevoDepartamento;
 	END TRY

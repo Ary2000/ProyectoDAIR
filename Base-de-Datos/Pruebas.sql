@@ -119,25 +119,25 @@ SELECT * FROM dbo.SesionAIR
 EXEC dbo.ReadSesionAIR 1
 EXEC dbo.ReadSesionAIR 3
 EXEC dbo.ReadSesionAIR 6
-EXEC dbo.UpdateSesionAIR 6, 'AIR ordinaria Nº 101-2022','18/4/2022','8:02','11:48'
+EXEC dbo.UpdateSesionAIR 6, 'AIR ordinaria Nº 101-2022','18/4/2022','8:02','11:48','www.youtube.com'
 EXEC dbo.DeleteSesionAIR 3
 EXEC dbo.ReadSesionAIR 6
 EXEC dbo.ReadSesionAIR 3
 
 ------------SesionDAIR------------
-EXEC dbo.CreateSesionDAIR 2,'DAIR ordinaria Nº 104-2022','17/6/2021','8:00','12:00'
-EXEC dbo.CreateSesionDAIR 2,'DAIR ordinaria Nº 105-2022','16/9/2020','8:00','12:00'
-EXEC dbo.CreateSesionDAIR 2,'DAIR ordinaria Nº 106-2022','13/5/2021','8:00','12:00'
-EXEC dbo.CreateSesionDAIR 1,'DAIR ordinaria Nº 103-2022','16/9/2022','8:00','12:00'
-EXEC dbo.CreateSesionDAIR 1,'DAIR ordinaria Nº 102-2022','9/7/2022','8:00','12:00'
-EXEC dbo.CreateSesionDAIR 1,'DAIR extraordinaria Nº 101-2022','19/4/2022','8:00','12:00'
-EXEC dbo.CreateSesionDAIR 1,'DAIR ordinaria Nº 100-2022','26/2/2022','8:00','12:00'
+EXEC dbo.CreateSesionDAIR 2,'DAIR ordinaria Nº 104-2022','17/6/2021','8:00','12:00','www.youtube.com',''
+EXEC dbo.CreateSesionDAIR 2,'DAIR ordinaria Nº 105-2022','16/9/2020','8:00','12:00','www.youtube.com',''
+EXEC dbo.CreateSesionDAIR 2,'DAIR ordinaria Nº 106-2022','13/5/2021','8:00','12:00','www.youtube.com',''
+EXEC dbo.CreateSesionDAIR 1,'DAIR ordinaria Nº 103-2022','16/9/2022','8:00','12:00','www.youtube.com',''
+EXEC dbo.CreateSesionDAIR 1,'DAIR ordinaria Nº 102-2022','9/7/2022','8:00','12:00','www.youtube.com',''
+EXEC dbo.CreateSesionDAIR 1,'DAIR extraordinaria Nº 101-2022','19/4/2022','8:00','12:00','www.youtube.com',''
+EXEC dbo.CreateSesionDAIR 1,'DAIR ordinaria Nº 100-2022','26/2/2022','8:00','12:00','www.youtube.com',''
 
 SELECT * FROM dbo.SesionDAIR
 EXEC dbo.ReadSesionDAIR 1
 EXEC dbo.ReadSesionDAIR 3
 EXEC dbo.ReadSesionDAIR 6
-EXEC dbo.UpdateSesionDAIR 6, 'DAIR ordinaria Nº 101-2022','18/4/2022','8:02','11:48'
+EXEC dbo.UpdateSesionDAIR 6, 'DAIR ordinaria Nº 101-2022','18/4/2022','8:02','11:48','www.google.com'
 EXEC dbo.DeleteSesionDAIR 3
 EXEC dbo.ReadSesionDAIR 6
 EXEC dbo.ReadSesionDAIR 3
@@ -159,7 +159,7 @@ EXEC dbo.UpdateAsistenciaAIR 5,'301451450',0
 EXEC dbo.DeleteAsistenciaAIR 6
 
 EXEC dbo.DeleteAsistenciaAIR 1
-EXEC dbo.NuevoRegistroAIR 2
+EXEC dbo.NuevoRegistroAIR 4,'C:\Users\admin\Desktop\TEC\2022\Semestre II\Proyecto\ProyectoDAIR\ProyectoDAIR\Back-End\UploadedFiles\Reportes AIR 100-2022.xlsx','Padrón_Resumen'
 SELECT * FROM dbo.RegistroAsistenciaAIR
 
 ------------Registro Asistencia DAIR------------
