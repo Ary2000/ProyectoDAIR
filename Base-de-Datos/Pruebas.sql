@@ -285,7 +285,7 @@ EXEC dbo.ReadUsuario 1
 -------------Pruebas Get-----------
 EXEC dbo.GetAsambleistas
 EXEC dbo.GetAsistenciaSesionDAIR 1
-EXEC dbo.GetAsistenciaSesionAIR 1
+EXEC dbo.GetAsistenciaSesionAIR 4
 EXEC dbo.GetDepartamento
 EXEC dbo.GetEtapa
 EXEC dbo.GetNotificaciones 
