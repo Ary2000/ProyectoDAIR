@@ -11,6 +11,7 @@ using System.Text;
 using System.Web.UI.WebControls;
 using System.Reflection;
 using Back_End.Models;
+//using static System.Net.WebRequestMethods;
 
 namespace Back_End.Controllers
 {
@@ -207,16 +208,47 @@ namespace Back_End.Controllers
         [HttpPost]
         public ActionResult EnviarEdicionSesionAIR(FormEditarDetallesSesionAIR model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 System.Console.WriteLine("Se tiene la infomacion");
+                string path = "";
+                try
+                {
+                    if (model.ArchivoPadron.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(model.ArchivoPadron.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                        model.ArchivoPadron.SaveAs(_path);
+                        path = _path;
+                    }
+                    ViewBag.Message = "File Uploaded Successfully!!";
+                    //return View();
+                }
+                catch
+                {
+                    ViewBag.Message = "File upload failed!!";
+                    //return View();
+                }
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "', '" + model.PathArchivo + "'", con);
+                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionAIR " + model.Id + 
+                                                ", '" + model.Nombre + "', '" + 
+                                                model.Fecha + "', '" + 
+                                                model.TiempoInicial + "', '" + 
+                                                model.TiempoFinal + "', '" + 
+                                                model.Link + "'", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
+                SqlCommand cmd2 = new SqlCommand("EXEC NuevoRegistroAIR " + model.Id +
+                                                ", '" + path + "', '" +
+                                                model.NombrePadron+"'");
+                cmd2.Connection = con;
+                cmd2.ExecuteNonQuery();
+                //SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                //DataTable dt2 = new DataTable();
                 con.Close();
                 da.Fill(dt);
+                //da2.Fill(dt2);
             }
             return RedirectToAction("SesionesAIR");
         }
@@ -247,7 +279,7 @@ namespace Back_End.Controllers
                 System.Console.WriteLine("Se tiene la infomacion");
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionDAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "', '" + model.PathArchivo + "'", con);
+                SqlCommand cmd = new SqlCommand("EXEC UpdateSesionDAIR " + model.Id + ", '" + model.Nombre + "', '" + model.Fecha + "', '" + model.TiempoInicial + "', '" + model.TiempoFinal + "', '" + model.Link + "'", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 con.Close();

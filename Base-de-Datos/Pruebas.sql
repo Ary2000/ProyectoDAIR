@@ -159,7 +159,7 @@ EXEC dbo.UpdateAsistenciaAIR 5,'301451450',0
 EXEC dbo.DeleteAsistenciaAIR 6
 
 EXEC dbo.DeleteAsistenciaAIR 1
-EXEC dbo.NuevoRegistroAIR 4,'C:\Users\admin\Desktop\TEC\2022\Semestre II\Proyecto\ProyectoDAIR\ProyectoDAIR\Back-End\UploadedFiles\Reportes AIR 100-2022.xlsx','Padrón_Resumen'
+EXEC dbo.NuevoRegistroAIR 4,'C:\\Users\\admin\\Desktop\\TEC\\2022\\Semestre II\\Proyecto\\ProyectoDAIR\\ProyectoDAIR\\Back-End\\UploadedFiles\\Reportes AIR 100-2022.xlsx', 'Padrón_Resumen'
 SELECT * FROM dbo.RegistroAsistenciaAIR
 
 ------------Registro Asistencia DAIR------------

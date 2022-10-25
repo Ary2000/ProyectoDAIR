@@ -56,6 +56,24 @@ SELECT DISTINCT Sede FROM @TempTable
 
 --DELETE FROM dbo.Departamento WHERE Id > 32;
 
+SELECT * FROM dbo.RegistroAsistenciaAIR
+SELECT * FROM dbo.Asambleista
+
+DELETE FROM [dbo].RegistroAsistenciaAIR
+DBCC CHECKIDENT(RegistroAsistenciaAIR, RESEED, 0)
+SELECT * FROM [dbo].RegistroAsistenciaAIR
+
+DELETE FROM [dbo].RegistroAsistenciaDAIR
+DBCC CHECKIDENT(RegistroAsistenciaDAIR, RESEED, 0)
+SELECT * FROM [dbo].RegistroAsistenciaDAIR
+
+DELETE FROM [dbo].Padron
+DBCC CHECKIDENT(Padron, RESEED, 0)
+SELECT * FROM [dbo].Padron
+
+DELETE FROM [dbo].Asambleista
+DBCC CHECKIDENT(Asambleista, RESEED, 0)
+SELECT * FROM [dbo].Asambleista
 
 --SELECT DEPARTAMENTO,
 --		SECTOR,

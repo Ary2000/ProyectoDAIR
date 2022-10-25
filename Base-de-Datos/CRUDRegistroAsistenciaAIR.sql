@@ -37,7 +37,7 @@ SET NOCOUNT ON
 					UPDATE dbo.RegistroAsistenciaAIR
 					SET Asistio = @Asistio,
 						Validacion = 1
-					WHERE SesionAIRId = @SesionAIRId
+					WHERE SesionAIRId = @SesionAIRId AND AsambleistaId = @AsambleistaId
 					SELECT 0
 				END
 		COMMIT TRANSACTION nuevaAsistenciaAIR;
@@ -221,22 +221,14 @@ SET NOCOUNT ON
 			INNER JOIN dbo.Sede AS Sd ON TT.Sede = Sd.Nombre
 			WHERE CONVERT(NVARCHAR(16), TT.Cedula) NOT IN (SELECT Cedula FROM dbo.Asambleista)
 			
-			UPDATE dbo.RegistroAsistenciaAIR
-			SET AsambleistaId = A.Id,
-				Asistio = 0,
-				Validacion = 1
-			FROM @TempTable AS TT
-			INNER JOIN dbo.Asambleista AS A ON CONVERT(NVARCHAR(16), TT.Cedula) = A.Cedula
-			WHERE A.Cedula = CONVERT(NVARCHAR(16), TT.Cedula) AND SesionAIRId = @SesionId
-			
-			INSERT INTO dbo.RegistroAsistenciaAIR(SesionAIRId,AsambleistaId,Asistio,Validacion)
-			SELECT @SesionId,
-					A.Id,
-					0,
-					1
-			FROM @TempTable TT
-			INNER JOIN dbo.Asambleista AS A ON CONVERT(NVARCHAR(16), TT.Cedula) = A.Cedula
-			WHERE A.Cedula = CONVERT(NVARCHAR(16), TT.Cedula) AND NOT EXISTS (SELECT Id FROM dbo.RegistroAsistenciaAIR WHERE AsambleistaId = A.Id AND SesionAIRId = @SesionId)
+			--INSERT INTO dbo.RegistroAsistenciaAIR(SesionAIRId,AsambleistaId,Asistio,Validacion)
+			--SELECT @SesionId,
+			--		A.Id,
+			--		0,
+			--		1
+			--FROM @TempTable TT
+			--INNER JOIN dbo.Asambleista AS A ON CONVERT(NVARCHAR(16), TT.Cedula) = A.Cedula
+			--WHERE A.Cedula = CONVERT(NVARCHAR(16), TT.Cedula) AND NOT EXISTS (SELECT Id FROM dbo.RegistroAsistenciaAIR WHERE AsambleistaId = A.Id AND SesionAIRId = @SesionId)
 			
 			
 			SELECT @inicio = MIN(Sec),
@@ -263,7 +255,7 @@ SET NOCOUNT ON
 					EXEC dbo.CreateAsistenciaAIR @SesionId, @cedula,0 
 					SET @inicio = @inicio + 1
 				END
-			SELECT * FROM dbo.RegistroAsistenciaAIR
+			--SELECT * FROM dbo.RegistroAsistenciaAIR
 		COMMIT TRANSACTION modificarAsistenciaAIR;
 		SELECT 1;
 	END TRY
