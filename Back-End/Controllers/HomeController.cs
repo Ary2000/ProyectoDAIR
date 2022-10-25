@@ -117,6 +117,25 @@ namespace Back_End.Controllers
         public ActionResult GuardarNuevaSesionAIR(FormCrearSesionAIR model){
             if (ModelState.IsValid)
             {
+                string path = "";
+                try
+                {
+                    if (model.ArchivoPadron.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(model.ArchivoPadron.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                        model.ArchivoPadron.SaveAs(_path);
+                        path = _path;
+                    }
+                    ViewBag.Message = "File Uploaded Successfully!!";
+                    //return View();
+                }
+                catch
+                {
+                    ViewBag.Message = "File upload failed!!";
+                    //return View();
+                }
+
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("EXEC CreateSesionAIR "
@@ -126,11 +145,17 @@ namespace Back_End.Controllers
                     + model.TiempoInicial + "', '"
                     + model.TiempoFinal + "', '"
                     + model.Descripcion + "', '"
-                    + model.PathArchivo + "'", con);
+                    + model.Link + "'", con);
+                var temp = cmd.ExecuteScalar();
+                SqlCommand cmd2 = new SqlCommand("EXEC NuevoRegistroAIR " + Convert.ToString(temp) +
+                                                ", '" + path + "', '" +
+                                                model.NombrePadron + "'");
+                cmd2.Connection = con;
+                cmd2.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
+                //DataTable dt = new DataTable();
                 con.Close();
-                da.Fill(dt);
+                //da.Fill(dt);
             }
             return RedirectToAction("SesionesAIR");
         }
