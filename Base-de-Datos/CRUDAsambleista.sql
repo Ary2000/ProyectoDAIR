@@ -7,10 +7,10 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[CreateAsambleista] 
-    @Departamento NVARCHAR(32),
+    @Departamento NVARCHAR(128),
 	@Sector NVARCHAR(32),
 	@Sede NVARCHAR(32),
-	@Nombre NVARCHAR(64),
+	@Nombre NVARCHAR(128),
 	@Cedula NVARCHAR(16)
 AS
 BEGIN
@@ -49,6 +49,12 @@ SET NOCOUNT ON
 				END
 			ELSE
 				BEGIN
+					UPDATE dbo.Asambleista
+					SET DepartamentoId = @DepartamentoId,
+						SectorId = @SectorId,
+						SedeId = @SedeId,
+						Nombre = @Nombre
+					WHERE Cedula = @Cedula
 					SELECT 0
 				END
 		COMMIT TRANSACTION nuevoAsambleista;
@@ -58,6 +64,8 @@ SET NOCOUNT ON
 		IF @@TRANCOUNT>0
 			ROLLBACK TRANSACTION nuevoAsambleista;
 		SELECT -1
+		
+		SELECT ERROR_MESSAGE() AS ErrorMessage;
 	END CATCH
 SET NOCOUNT OFF
 END
