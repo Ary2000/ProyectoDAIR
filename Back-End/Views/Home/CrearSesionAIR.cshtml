@@ -45,7 +45,7 @@
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="search--container">
-            @using (Html.BeginForm("GuardarNuevaSesionAIR", "Home", FormMethod.Post))
+            @using (Html.BeginForm("GuardarNuevaSesionAIR", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
 
@@ -103,17 +103,18 @@
                            type = "text"
                        })
                             <label for="validationTooltip03">Link de Carpeta: </label>
-                            @Html.TextBoxFor(model => model.PathArchivo, new
+                            @Html.TextBoxFor(model => model.Link, new
                        {
                            @class = "form-control",
                            type = "text"
                        })
                             <label for="validationTooltip03">Padrón: </label>
-                            @Html.TextBoxFor(model => model.Fecha, new
+                            @Html.TextBoxFor(model => model.NombrePadron, new
                        {
                            @class = "form-control",
-                           type = "file"
+                           type = "text"
                        })
+                            @Html.TextBoxFor(model => model.ArchivoPadron, new { type = "file" }) <br />
                         </div>
                     </div>
 
