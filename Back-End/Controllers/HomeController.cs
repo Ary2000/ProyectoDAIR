@@ -589,5 +589,12 @@ namespace Back_End.Controllers
             da.Fill(dt);
             return View(dt);
         }
+
+        //CREAR NOTIFICACION
+        [Route("Home/CrearNotificacion")]
+        public ActionResult CrearNotificacion()
+        {
+            return View();
+        }
     }
 }

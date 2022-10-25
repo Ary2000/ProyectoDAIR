@@ -119,6 +119,7 @@
     <Content Include="styles\registro-propuestas.css" />
     <Content Include="styles\sesion.css" />
     <Content Include="styles\sesiones.css" />
+    <Content Include="styles\notificaciones.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FormCrearNotificacion.cs" />
     <Compile Include="Models\FormCrearPropuestaAIR.cs" />
     <Compile Include="Models\FormCrearPropuestaDAIR.cs" />
     <Compile Include="Models\FormEditarPropuestaAIR.cs" />
@@ -155,6 +157,7 @@
     <Content Include="Views\Home\EditarSesionDAIR.cshtml" />
     <Content Include="Views\Home\CrearSesionDAIR.cshtml" />
     <Content Include="Views\Home\Notificaciones.cshtml" />
+    <Content Include="Views\Home\CrearNotificacion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
