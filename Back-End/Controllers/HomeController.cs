@@ -590,7 +590,7 @@ namespace Back_End.Controllers
             data3.Fill(datatable3);
             ViewBag.Sede = datatable3.Rows[0]["Nombre"];
 
-            //SESIONES A LAS QUE DEBIO ASISTIR            
+            //SESIONES A LAS QUE DEBIO ASISTIR r           
             SqlCommand cmd4 = new SqlCommand("EXEC GetAsistenciaAsambleista " + datatable.Rows[0]["Cedula"], conection);
             SqlDataAdapter data4 = new SqlDataAdapter(cmd4);
             DataTable datatable4 = new DataTable();
