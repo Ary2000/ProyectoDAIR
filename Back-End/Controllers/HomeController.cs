@@ -11,7 +11,6 @@ using System.Text;
 using System.Web.UI.WebControls;
 using System.Reflection;
 using Back_End.Models;
-using static System.Net.Mime.MediaTypeNames;
 //using static System.Net.WebRequestMethods;
 
 namespace Back_End.Controllers
@@ -510,7 +509,7 @@ namespace Back_End.Controllers
                     + model.Nombre + "', '"
                     + model.Link + "', '"
                     + model.NumeroPropuesta + "', '"
-                    + model.VotosFavor + "', '" 
+                    + model.VotosFavor + "', '"
                     + model.VotosContra + "', '"
                     + model.VotosBlanco + "'", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -520,7 +519,6 @@ namespace Back_End.Controllers
             }
             return RedirectToAction("SesionesAIR");
         }
-
         [HttpPost]
         public ActionResult EnviarEdicionPropuestaDAIR(FormEditarPropuestaDAIR model)
         {
@@ -542,8 +540,6 @@ namespace Back_End.Controllers
             }
             return RedirectToAction("SesionesDAIR");
         }
-
-        //CONSTANCIAS
         [Route("Home/Constancias")]
         public ActionResult Constancias()
         {
@@ -555,61 +551,8 @@ namespace Back_End.Controllers
             con.Close();
             da.Fill(dt);
             return View(dt);
+
         }
-
-        [Route("Home/ConstanciaAsambleista")]
-        public ActionResult ConstanciaAsambleista(int id)
-        {
-            SqlConnection conection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            conection.Open();
-
-            //Información de Asambleista
-            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.Asambleista WHERE Id=" + id, conection);
-            SqlDataAdapter data = new SqlDataAdapter(cmd);
-            DataTable datatable = new DataTable();
-            data.Fill(datatable);
-            ViewBag.Nombre = datatable.Rows[0]["Nombre"];
-            ViewBag.Cedula = datatable.Rows[0]["Cedula"];
-            ViewBag.Sede = datatable.Rows[0]["SedeId"];
-            //DEPARTAMENTO
-            SqlCommand cmd1 = new SqlCommand("SELECT * FROM dbo.Departamento WHERE Id=" + datatable.Rows[0]["DepartamentoID"], conection);
-            SqlDataAdapter data1 = new SqlDataAdapter(cmd1);
-            DataTable datatable1 = new DataTable();
-            data1.Fill(datatable1);
-            ViewBag.Departamento = datatable1.Rows[0]["Nombre"];
-            //SECTOR  SECTOR
-            SqlCommand cmd2 = new SqlCommand("SELECT * FROM dbo.Sector WHERE Id=" + datatable.Rows[0]["SectorId"], conection);
-            SqlDataAdapter data2 = new SqlDataAdapter(cmd2);
-            DataTable datatable2 = new DataTable();
-            data2.Fill(datatable2);
-            ViewBag.Sector = datatable2.Rows[0]["Nombre"];
-            //SEDE     SEDE     SEDE
-            SqlCommand cmd3 = new SqlCommand("SELECT * FROM dbo.Sede WHERE Id=" + datatable.Rows[0]["SedeId"], conection);
-            SqlDataAdapter data3 = new SqlDataAdapter(cmd3);
-            DataTable datatable3 = new DataTable();
-            data3.Fill(datatable3);
-            ViewBag.Sede = datatable3.Rows[0]["Nombre"];
-
-            //SESIONES A LAS QUE DEBIO ASISTIR            
-            SqlCommand cmd4 = new SqlCommand("EXEC GetAsistenciaAsambleista " + datatable.Rows[0]["Cedula"], conection);
-            SqlDataAdapter data4 = new SqlDataAdapter(cmd4);
-            DataTable datatable4 = new DataTable();
-            data4.Fill(datatable4);
-            datatable4.Columns.Add("NombreP", typeof(String));
-
-            foreach (DataRow row in datatable4.Rows)
-            {
-                SqlCommand cmd5 = new SqlCommand("SELECT * FROM dbo.Periodo WHERE Id=" + row["PeriodoId"], conection);
-                SqlDataAdapter data5 = new SqlDataAdapter(cmd5);
-                DataTable datatable5 = new DataTable();
-                data5.Fill(datatable5);
-                row["NombreP"] = datatable5.Rows[0]["AnioInicio"].ToString() + " - " + datatable5.Rows[0]["AnioFin"].ToString();
-            }
-            conection.Close();
-            return View(datatable4);
-        }
-
-
         public ActionResult AsistenciaAIR()
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
