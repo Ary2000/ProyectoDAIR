@@ -76,7 +76,7 @@
                             <td>@row["Cedula"].ToString()</td>
                             <td>@row["Sede"].ToString()</td>
                             <td>@row["Sector"].ToString()</td>
-                            <td>@Html.RouteLink("Ver Asistencia", "ConstanciaAsambleista", new { id = row["Id"] }, new { @class = "btn btn-secondary btn-sm" })</td>
+                            <td>@Html.ActionLink("Ver Asistencia", "ConstanciaAsambleista", new { id = row["Id"] }, new { @class = "btn btn-secondary btn-sm" })</td>
                         </tr>
                     }
                 </tbody>

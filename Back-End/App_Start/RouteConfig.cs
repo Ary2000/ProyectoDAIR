@@ -126,7 +126,7 @@ namespace Back_End
            routes.MapRoute(
                name: "ConstanciaAsambleista",
                url: "{controller}/ConstanciaAsambleista",
-               defaults: new { controller = "Home", action = "Constancias" }
+               defaults: new { controller = "Home", action = "ConstanciaAsambleista" }
            );
             routes.MapRoute(
                name: "AsistenciaAIR",
