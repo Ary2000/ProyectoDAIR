@@ -45,11 +45,8 @@
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="search--container"
-            @Html.TextBoxFor(model => model.SesionAIRId, new { placeholder = ViewBag.SesionAIRId })
-            @Html.ValidationMessageFor(model => model.SesionAIRId)
-            @using (Html.BeginForm($"GuardarNuevaPropuestaAIR", "Home", FormMethod.Post))
-            {
-                <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
+             @using (Html.BeginForm($"GuardarNuevaPropuestaAIR", "Home", FormMethod.Post)) { 
+                 <form class="needs-validation" style="top: 50%; left: 50%;" novalidate>
 
                     <div class="form-row">
                         <div class="col-md-4 mb-3">

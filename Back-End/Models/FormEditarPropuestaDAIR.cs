@@ -8,9 +8,8 @@ namespace Back_End.Models
 {
     public class FormEditarPropuestaDAIR
     {
-        public string Id { get; set; }
         [Required]
-        public string SesionDAIRId { get; set; }
+        public string Id { get; set; }
         [Required]
         public string Nombre { get; set; }
         [Required]

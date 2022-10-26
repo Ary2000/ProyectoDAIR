@@ -109,10 +109,10 @@
                                     <a href="#" class="btn btn-secondary btn-sm btn-votacion">
                                         Ver votación
                                     </a>
-                                    @Html.RouteLink("Propuesta", "Propuesta", new { controller = "Home", path = row["Link"].ToString() }, new { @class = "btn btn-secondary btn-sm" })
+                                    <a href=@row["Link"].ToString() target="_blank" class="btn btn-secondary btn-sm">Propuesta</a>
                                 </td>
                                 <td>
-                         
+
                                     @Html.RouteLink("Editar", "EditarPropuestaAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/pencil.png", alt = "Lapiz" })
                                     @Html.ActionLink("Borrar", "BorrarPropuestaAIR", new { id = row["Id"] }, new { @class = "accion--icon", src = "~/src/trash.png", alt = "Basurero" })
 
@@ -126,7 +126,7 @@
             </div>
             <div class="container--header">
                 @Html.RouteLink("Volver", "SesionesAIR", null, new { @class = "btn btn-outline-secondary" })
-                @Html.RouteLink("Agregar Propuesta", "CrearPropuestaAIR", new { SesionAIRId = ViewBag.Id }, new { @class = "accion--icon"})
+                @Html.RouteLink("Agregar Propuesta", "CrearPropuestaAIR", new { SesionAIRId = ViewBag.SesionAIRId }, new { @class = "accion--icon" })
 
             </div>
         </form>

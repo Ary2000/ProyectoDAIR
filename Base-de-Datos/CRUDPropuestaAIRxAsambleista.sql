@@ -140,7 +140,7 @@ SET NOCOUNT ON
 		FROM dbo.PropuestaAIRxAsambleista PxA
 		INNER JOIN dbo.Asambleista A ON PxA.AsambleistaId = A.Id
 		INNER JOIN dbo.PropuestaAIR P ON PxA.PropuestaAIRId = P.Id
-		WHERE PxA.[PropuestaAIRID] = @PropuestaId
+		WHERE PxA.[PropuestaAIRID] = @PropuestaId AND PxA.Validaion = 1 AND P.Valido = 1
 	END TRY
 
 	BEGIN CATCH

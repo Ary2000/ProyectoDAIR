@@ -23,6 +23,11 @@ namespace Back_End
                 defaults: new {controller = "Home"}
             );
             routes.MapRoute(
+                name: "EditarSesionDAIR",
+                url: "{controller}/EditarSesionDAIR",
+                defaults: new { controller = "Home" }
+            );
+            routes.MapRoute(
                 name: "SesionesAIR",
                 url: "{controller}/SesionesAIR",
                 defaults: new { controller = "Home", action = "SesionesAIR" }
@@ -53,16 +58,20 @@ namespace Back_End
                 defaults: new { controller = "Home" }
             );
             routes.MapRoute(
+                name: "CrearSesionDAIR",
+                url: "{controller}/CrearSesionDAIR",
+                defaults: new { controller = "Home", action = "CrearSesionDAIR" }
+            );
+            routes.MapRoute(
+                name: "GuardarNuevaSesionDAIR",
+                url: "{controller}/GuardarNuevaSesionDAIR",
+                defaults: new { controller = "Home" }
+            );
+            routes.MapRoute(
                 name: "Propuesta",
                 url: "{controller}/Propuesta",
                 defaults: new {controller = "Home"}
             );
-            routes.MapRoute(
-                name:"EnviarEdicionSesionAIR",
-                url: "{controller}/EnviarEdicionAIR",
-                defaults: new {controller = "Home"}
-            );
-
             //EDITAR PROPUESTA AIR
             routes.MapRoute(
                name: "EditarPropuestaAIR",
@@ -109,8 +118,21 @@ namespace Back_End
                 url: "{controller}/GuardarNuevaPropuestaDAIR",
                 defaults: new { controller = "Home" }
             );
-
-
+            routes.MapRoute(
+               name: "Constancias",
+               url: "{controller}/Constancias",
+               defaults: new { controller = "Home", action = "Constancias" }
+           );
+            routes.MapRoute(
+               name: "AsistenciaAIR",
+                url: "{controller}/AsistenciaAIR",
+                defaults: new { controller = "Home" }
+            );
+            routes.MapRoute(
+                name: "AsistenciaSesionAIR",
+                url: "{controller}/Asistencia",
+                defaults: new { controller = "Home" }
+            );
         }
     }
 }

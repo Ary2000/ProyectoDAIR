@@ -30,16 +30,18 @@ SET NOCOUNT ON
 										NumeroDePropuesta,
 										VotosAFavor,
 										VotosEnContra,
-										VotosEnBlanco)
-			SELECT SesionAIRId,
-					EtapaId,
-					Aprovado,
-					Nombre,
-					Link,
-					NumeroDePropuesta,
-					VotosAFavor,
-					VotosEnContra,
-					VotosEnBlanco;
+										VotosEnBlanco,
+										Valido)
+			SELECT @SesionAIR,
+					@Etapa,
+					@Aprovado,
+					@Nombre,
+					@Link,
+					@NumeroPropuesta,
+					@AFavor,
+					@EnContra,
+					@EnBlanco,
+					1;
 		COMMIT TRANSACTION nuevaPropuestaAIR;
 		SELECT @@Identity Id;
 	END TRY
@@ -133,8 +135,13 @@ SET NOCOUNT ON
 	BEGIN TRY
 		SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 		BEGIN TRANSACTION eliminarPropuestaAIR
-			DELETE FROM dbo.PropuestaAIR
-			WHERE Id = @Id;
+			UPDATE dbo.PropuestaAIRxAsambleista
+			SET Validaion = 0
+			WHERE PropuestaAIRId = @Id
+			
+			UPDATE dbo.PropuestaAIR
+			SET Valido = 0
+			WHERE Id = @Id
 		COMMIT TRANSACTION eliminarPropuestaAIR;
 		SELECT @Id;
 	END TRY

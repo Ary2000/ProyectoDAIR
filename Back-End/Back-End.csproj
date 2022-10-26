@@ -126,13 +126,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\FormCrearPropuestaDAIR.cs" />
     <Compile Include="Models\FormCrearPropuestaAIR.cs" />
-    <Compile Include="Models\FormEditarPropuestaDAIR.cs" />
+    <Compile Include="Models\FormCrearPropuestaDAIR.cs" />
     <Compile Include="Models\FormEditarPropuestaAIR.cs" />
     <Compile Include="Models\FormCrearSesionDAIR.cs" />
     <Compile Include="Models\FormCrearSesionAIR.cs" />
     <Compile Include="Models\FormEditarDetallesSesionAIR.cs" />
+    <Compile Include="Models\FormEditarPropuestaDAIR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +151,8 @@
     <Content Include="Views\Home\SesionAIR.cshtml" />
     <Content Include="Views\Home\VerSesionAIR.cshtml" />
     <Content Include="Views\Home\EditarPropuestaAIR.cshtml" />
-    <Content Include="Views\Home\CrearPropuestaAIR.cshtml" />
-    <Content Include="Views\Home\EditarPropuestaDAIR.cshtml" />
-    <Content Include="Views\Home\CrearPropuestaDAIR.cshtml" />
+    <Content Include="Views\Home\EditarSesionDAIR.cshtml" />
+    <Content Include="Views\Home\CrearSesionDAIR.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

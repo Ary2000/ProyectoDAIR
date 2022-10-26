@@ -45,14 +45,14 @@
             <img class="card--img" src="~/src/check.png" alt="Card image cap">
             <div class="card--body">
                 <h4 class="card--title">Asistencia</h4>
-                <a href="~/Pages/control-asistencia.html" class="btn btn-primary"> Ingresar </a>
+                @Html.ActionLink("Ingresar", "AsistenciaAIR", null, new { @class = "btn btn-primary" })
             </div>
         </div>
         <div class="card">
             <img class="card--img" src="~/src/file.png" alt="Card image cap">
             <div class="card--body">
                 <h4 class="card--title">Constancias</h4>
-                <a href="~/Pages/constancias.html" class="btn btn-primary"> Ingresar </a>
+                @Html.ActionLink("Constancias", "Constancias", null, new { controller = "Home", action = "Constancias" }, new { @class = "btn btn-primary" })
             </div>
         </div>
         <div class="card">

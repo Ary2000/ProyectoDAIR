@@ -15,8 +15,8 @@ SET NOCOUNT ON
 		SELECT P.Id,E.Nombre AS Etapa, P.Nombre, P.Link,P.Aprovado,P.NumeroDePropuesta,P.VotosAFavor,P.VotosEnContra,P.VotosEnBlanco 
 		FROM dbo.PropuestaAIR P
 		INNER JOIN dbo.Etapa E ON E.Id = P.EtapaId
-		WHERE P.SesionAIRId = @SesionId
-		ORDER BY P.NumeroDePropuesta
+		WHERE P.SesionAIRId = @SesionId AND P.Valido = 1
+		ORDER BY P.NumeroDePropuesta ASC
 	END TRY
 
 	BEGIN CATCH
@@ -39,8 +39,8 @@ BEGIN
 SET NOCOUNT ON
 	BEGIN TRY
 		SELECT Id,Nombre,Aprovado,Link
-		FROM dbo.PropuestaDAIR
-		WHERE Id = @SesionId
+		FROM dbo.PropuestaDAIR P
+		WHERE P.SesionDAIRId = @SesionId AND P.Valido = 1
 	END TRY
 
 	BEGIN CATCH

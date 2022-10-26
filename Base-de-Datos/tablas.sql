@@ -2,12 +2,12 @@
 
 --CREATE DATABASE [ProyectoDAIR]
 
---USE [ProyectoDAIR];
---GO
+USE [ProyectoDAIR];
+GO
 
 CREATE TABLE Departamento(
 	  [Id]					INT NOT NULL IDENTITY(1,1),
-	  [Nombre]				NVARCHAR(32) NOT NULL,
+	  [Nombre]				NVARCHAR(128) NOT NULL,
 	  PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE Asambleista(
 	  [DepartamentoId]		INT NOT NULL,
 	  [SectorId]			INT NOT NULL,
 	  [SedeId]				INT NOT NULL,
-	  [Nombre]				NVARCHAR(64) NOT NULL,
+	  [Nombre]				NVARCHAR(128) NOT NULL,
 	  [Cedula]				NVARCHAR(16) NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
 	  FOREIGN KEY ([DepartamentoId]) REFERENCES dbo.Departamento ([ID]),
@@ -64,7 +64,8 @@ CREATE TABLE SesionAIR(
 	  [HoraInicio]			TIME NOT NULL,
 	  [HoraFin]				TIME NOT NULL,
 	  [Descripcion] 			NVARCHAR(200),
-	  [Link]	 			NVARCHAR(200)
+	  [Link]	 			NVARCHAR(200),
+	  [Valido]				BIT NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
 	  FOREIGN KEY ([PeriodoId]) REFERENCES dbo.Periodo ([ID])
 );
@@ -76,8 +77,9 @@ CREATE TABLE SesionDAIR(
 	  [Fecha]				DATE NOT NULL,
 	  [HoraInicio]			TIME NOT NULL,
 	  [HoraFin]				TIME NOT NULL,
-	  [Descripcion] 			NVARCHAR(200),
-	  [Link]	 			NVARCHAR(200)
+	  [Descripcion] 		NVARCHAR(200),
+	  [Link]	 			NVARCHAR(200),
+	  [Valido]				BIT NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
 	  FOREIGN KEY ([PeriodoId]) REFERENCES dbo.Periodo ([ID])
 );
@@ -87,7 +89,8 @@ CREATE TABLE PropuestaDAIR(
 	  [SesionDAIRId]		INT NOT NULL,
 	  [Nombre]				NVARCHAR(64) NOT NULL,
 	  [Aprovado]			BIT NOT NULL,
-	  [Link]				NVARCHAR(256) NOT NULL
+	  [Link]				NVARCHAR(256) NOT NULL,
+	  [Valido]				BIT NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
 	  FOREIGN KEY ([SesionDAIRId]) REFERENCES dbo.SesionDAIR ([ID])
 );
@@ -102,7 +105,8 @@ CREATE TABLE PropuestaAIR(
 	  [NumeroDePropuesta]	INT NOT NULL,
 	  [VotosAFavor]			INT NOT NULL,
 	  [VotosEnContra]		INT NOT NULL,
-	  [VotosEnBlanco]		INT NOT NULL
+	  [VotosEnBlanco]		INT NOT NULL,
+	  [Valido]				BIT NOT NULL
 	  PRIMARY KEY CLUSTERED ([ID] ASC),
 	  FOREIGN KEY ([SesionAIRId]) REFERENCES dbo.SesionAIR ([ID]),
 	  FOREIGN KEY ([EtapaId]) REFERENCES dbo.Etapa ([ID])
