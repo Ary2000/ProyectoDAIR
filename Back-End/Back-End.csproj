@@ -158,6 +158,9 @@
     <Content Include="Views\Home\CrearSesionDAIR.cshtml" />
     <Content Include="Views\Home\Notificaciones.cshtml" />
     <Content Include="Views\Home\CrearNotificacion.cshtml" />
+    <Content Include="Views\Home\AsistenciaAIR.cshtml" />
+    <Content Include="Views\Home\AsistenciaSesionAIR.cshtml" />
+    <Content Include="Views\Home\Constancias.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
