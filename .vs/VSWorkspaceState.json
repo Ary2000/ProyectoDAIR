@@ -2,15 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Back-End",
-    "\\Back-End\\App_Start",
-    "\\Back-End\\Controllers",
     "\\Back-End\\Views",
     "\\Back-End\\Views\\Home"
   ],
-<<<<<<< Updated upstream
-  "SelectedNode": "\\Back-End\\Views\\Home\\Notificaciones.cshtml",
-=======
-  "SelectedNode": "\\Back-End\\Views\\Home\\CrearPropuestaAIR.cshtml",
->>>>>>> Stashed changes
+  "SelectedNode": "\\Back-End\\Views\\Home\\AsistenciaAIR.cshtml",
   "PreviewInSolutionExplorer": false
 }
